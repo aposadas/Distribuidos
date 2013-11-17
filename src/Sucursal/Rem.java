@@ -1,9 +1,9 @@
 /*
 The Interface for the Remote Object
  */
-package proyectosistemasdistribuidos;
+package Sucursal;
 import java.rmi.*;
-import proyectosistemasdistribuidos.Transporte;
+import Sucursal.Transporte;
 /**
  * The RMI client will use this interface directly.
  *  The RMI server will make a real remote object that
@@ -14,8 +14,10 @@ import proyectosistemasdistribuidos.Transporte;
  */
 public interface Rem extends java.rmi.Remote {
     
-    
     public String getMessage() throws RemoteException;
-    public Transporte pedirTransportes() throws RemoteException;
+    public Transporte pedirPaquetes() throws RemoteException;
+    public void enviarPaquete (Paquete paquete)throws RemoteException;
+    public void reenviarPaqueteAjeno (Transporte tasnporteEnvio) throws RemoteException;
+    
     
 }

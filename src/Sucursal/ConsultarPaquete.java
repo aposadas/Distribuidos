@@ -2,18 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectosistemasdistribuidos;
+package Sucursal;
 
 /**
  *
  * @author Aileen
  */
-public class ConsultarProducto extends javax.swing.JPanel {
+public class ConsultarPaquete extends javax.swing.JPanel {
 
     /**
      * Creates new form ConsultarProducto
      */
-    public ConsultarProducto() {
+    public ConsultarPaquete() {
         initComponents();
     }
 

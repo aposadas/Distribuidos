@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectosistemasdistribuidos;
+package Sucursal;
 
 /**
  *
@@ -80,7 +80,7 @@ public class EnviarPaquete extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptarActionPerformed
-        Logica.CrearPaquete(Integer.parseInt((String) jCBlistaSucursales.getSelectedItem()));
+        Logica.CrearPaquete((String) jCBlistaSucursales.getSelectedItem());
     }//GEN-LAST:event_jBAceptarActionPerformed
 
     /**

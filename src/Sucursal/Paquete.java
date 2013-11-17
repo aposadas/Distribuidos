@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectosistemasdistribuidos;
+package Sucursal;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,17 +14,17 @@ import java.util.Date;
  */
 public class Paquete {
     private int id;
-    private Date tiempoDeLlegada;
-    private Date tiempoDeSalida;
-    private int origen;
-    private int destino;
+    private long tiempoDeSalida;
+    private long tiempoDeLlegada;
+    private String origen;
+    private String destino;
     private ArrayList<Incidencia> listaIncidencia;
 
-    public int getDestino() {
+    public String getDestino() {
         return destino;
     }
 
-    public void setDestino(int destino) {
+    public void setDestino(String destino) {
         this.destino = destino;
     }
 
@@ -35,31 +36,32 @@ public class Paquete {
         this.listaIncidencia = listaIncidencia;
     }
 
-    public int getOrigen() {
+    public String getOrigen() {
         return origen;
     }
 
-    public void setOrigen(int origen) {
+    public void setOrigen(String origen) {
         this.origen = origen;
     }
 
-    public Date getTiempoDeLlegada() {
+    public long getTiempoDeLlegada() {
         return tiempoDeLlegada;
     }
 
-    public void setTiempoDeLlegada(Date tiempoDeLlegada) {
+    public void setTiempoDeLlegada(long tiempoDeLlegada) {
         this.tiempoDeLlegada = tiempoDeLlegada;
     }
 
-    public Date getTiempoDeSalida() {
+    public long getTiempoDeSalida() {
         return tiempoDeSalida;
     }
 
-    public void setTiempoDeSalida(Date tiempoDeSalida) {
+    public void setTiempoDeSalida(long tiempoDeSalida) {
         this.tiempoDeSalida = tiempoDeSalida;
     }
 
-    public Paquete(Date tiempoDeLlegada, Date tiempoDeSalida, int origen, int destino, ArrayList<Incidencia> listaIncidencia) {
+    public Paquete(int id, long tiempoDeLlegada, long tiempoDeSalida,String origen, String destino, ArrayList<Incidencia> listaIncidencia) {
+        this.id = id;
         this.tiempoDeLlegada = tiempoDeLlegada;
         this.tiempoDeSalida = tiempoDeSalida;
         this.origen = origen;
@@ -67,10 +69,22 @@ public class Paquete {
         this.listaIncidencia = listaIncidencia;
     }
 
-    public Paquete(Date tiempoDeSalida, int origen, int destino) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Paquete(int id, long tiempoDeSalida, String origen, String destino) {
+        this.id = id;
         this.tiempoDeSalida = tiempoDeSalida;
         this.origen = origen;
         this.destino = destino;
+    }
+
+    public Paquete() {
     }
     
     
