@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<Configuracion>
+             
+        <numeroSucursal>3</numeroSucursal>
+        <puertoSucursal>10003</puertoSucursal>
+        <numeroSucursalEnvio>1</numeroSucursalEnvio>
+        <numeroSucursalRecepcion>2</numeroSucursalRecepcion>
+        <ipSevidorCentral>localhost</ipSevidorCentral>  
+        <puertoServidorCentral>1337</puertoServidorCentral>
+        <ipSevidorEnvio>localhost</ipSevidorEnvio>
+        <puertoServidorEnvio>10001</puertoServidorEnvio>
+        <ipServidorRecepcion>localhost</ipServidorRecepcion>
+        <puertoServidorRecepcion>10002</puertoServidorRecepcion>
+   
+</Configuracion>
