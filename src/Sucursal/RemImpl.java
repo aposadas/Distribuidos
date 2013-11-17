@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 public class RemImpl extends UnicastRemoteObject implements Rem {
     public String transporteXML;
     
+    String transporte = "";
     public RemImpl() throws RemoteException 
     {
     

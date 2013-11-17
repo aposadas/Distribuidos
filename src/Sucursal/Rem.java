@@ -13,7 +13,7 @@ import Sucursal.Transporte;
  * @author Aileen
  */
 public interface Rem extends java.rmi.Remote {
-    
+    public String hola="";
     public String getMessage() throws RemoteException;
     public Transporte pedirPaquetes() throws RemoteException;
     public void enviarPaquete (Paquete paquete)throws RemoteException;

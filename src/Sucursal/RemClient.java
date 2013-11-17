@@ -26,6 +26,9 @@ public class RemClient {
   private static Registry registroServidorCentral;
   private static Registry registroServidorEnvio;
   private static Registry registroServidorRecepcion;
+  public static Rem remObjectCentral;
+  public static Rem remObjectEnvio;
+  public static Rem remObjectRecepcion;
      public static void CrearClientes() {
         try {
             //Configuracion de la jvm para rmi requerida
@@ -37,19 +40,19 @@ public class RemClient {
             registroServidorCentral = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorCentral);
             String hostCentral = Configuracion.ipServidorCentral;
             // Get remote object and store it in remObject:
-            Rem remObjectCentral = (Rem) Naming.lookup("//" + hostCentral + "/objetoServidorCentral");
+             remObjectCentral = (Rem) Naming.lookup("//" + hostCentral + "/objetoServidorCentral");
            //// Fin registro Servidor Central.
            
            /// Registro como cliente del Servidor Recepción
             registroServidorEnvio = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorEnvio);
             String hostEnvio =Configuracion.IpServidorEnvio;
-            Rem remObjectEnvio = (Rem) Naming.lookup("//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalEnvio);
+            remObjectEnvio = (Rem) Naming.lookup("//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalEnvio);
            //// Fin registro Servidor Recepcion.
             
             /// Registro como cliente del Servidor Envio
             registroServidorRecepcion = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorRecepcion);
             String hostRecepcion = Configuracion.IpServidorRecepcion;
-            Rem remObjectRecepcion = (Rem) Naming.lookup("//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalRecepcion);
+             remObjectRecepcion = (Rem) Naming.lookup("//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalRecepcion);
            //// Fin registro Servidor Envio.
             
             
