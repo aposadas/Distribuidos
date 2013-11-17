@@ -50,6 +50,7 @@ public class GestorXml {
      catch (Exception e) {
 	e.printStackTrace();
     }
+    
   }
    public static ArrayList<Paquete>obtenerPaquetesRecibidos(){
    
