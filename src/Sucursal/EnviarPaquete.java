@@ -4,6 +4,8 @@
  */
 package Sucursal;
 
+import java.rmi.RemoteException;
+
 /**
  *
  * @author Aileen
@@ -79,7 +81,7 @@ public class EnviarPaquete extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptarActionPerformed
+    private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_jBAceptarActionPerformed
         Logica.CrearPaquete((String) jCBlistaSucursales.getSelectedItem());
     }//GEN-LAST:event_jBAceptarActionPerformed
 

@@ -4,10 +4,13 @@
  */
 package Sucursal;
 
+import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,9 +25,19 @@ public class Logica {
    
       
       ArrayList <Paquete> paquetesRecibidos = GestorXml.obtenerPaquetesRecibidos();
-      int idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
+      
+      int idPaqueteACrear;
+      if (paquetesRecibidos==null)
+        idPaqueteACrear = Integer.parseInt(Configuracion.numeroSucursal + Configuracion.numeroSucursalRecepcion) + 1;
+      else
+          idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
+      
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
-      agregarPaquete(paquete,Configuracion.transporteEnvio);
+        try {
+            RemClient.remObjectEnvio.enviarPaquete(paquete);
+        } catch (RemoteException ex) {
+            Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     //static ArrayList <String> obtenerSucursales() {

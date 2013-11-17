@@ -58,11 +58,13 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        xstream.alias("Transporte", Transporte.class);
        this.transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
         try {
-            UnicastRemoteObject.exportObject(this);
+            UnicastRemoteObject.exportObject(this,Configuracion.puertoServidorEnvio);
         } catch (RemoteException ex) {
             Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+          catch (Exception e){
+          e.printStackTrace();
+          }
        
     }
     
