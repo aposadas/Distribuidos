@@ -64,7 +64,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
              transportePaquetes.getListaPaquete().remove(j);
          }
-        //ELSE!!!!!!
+        //ELSE!!!!!! 
        }
              
         try {
