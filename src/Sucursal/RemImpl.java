@@ -42,7 +42,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     public Transporte pedirPaquetes() throws RemoteException {
         
              //Así aca podemos setear aca colocar el thread sleep de 5 seg         
-        return Configuracion.tranporteRecepcion;
+        return Configuracion.transporteRecepcion;
         
     }
         
@@ -50,33 +50,53 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     
     @Override
     public void enviarPaquete(String transporte) throws RemoteException{
-      this.transporteXML = transporte;
+     // this.transporteXML = transporte;
         System.out.println(transporte);
         XStream xstream = new XStream ();
         Transporte transportePaquetes =(Transporte) xstream.fromXML(transporte);
         
-       int tamanio =transportePaquetes.getListaPaquete().size();
-     
+       int tamanio = transportePaquetes.getListaPaquete().size();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       //chequeo si el paquete es para esta o sucursal y lo agrego sino le agrego una incidencia y lo reenvio
        if (tamanio>0){
-        for (int j=0;j<tamanio+1;j++)
+           
+        for (int j=0;j<tamanio+1;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
              transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(System.currentTimeMillis()/1000);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
              transportePaquetes.getListaPaquete().remove(j);
+             //duerme 10 segundos
+             try {
+                 Thread.sleep(10000);
+             } catch (InterruptedException ex) {
+                 Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
+             }
          }
-        //ELSE!!!!!! 
+         else {
+                Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasó por la sucursal: " + Configuracion.numeroSucursal);
+                transportePaquetes.getListaPaquete().get(j).getListaIncidencia().add(incidencia);
+                //agregar espera de tiempo
+         }
+        }
+       }
+        transporte = xstream.toXML(transportePaquetes);
+        
+        //chequeo si estoy en la misma sucursal de donde salí.
+       if (transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal))
+           Configuracion.transporteEnvio.setDisponible(true);
+       
+       else {
+       RemClient.remObjectEnvio.enviarPaquete(transporte);
        }
              
-        try {
-            UnicastRemoteObject.exportObject(this);
-        } catch (RemoteException ex) {
-            Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-          catch (Exception e){
-          e.printStackTrace();
-          }
+    } 
        
-    }
+    
     
     public void reenviarPaqueteAjeno(String transporteEnvio)throws RemoteException{
         

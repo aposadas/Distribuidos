@@ -4,6 +4,7 @@
  */
 package Sucursal;
 
+import static Sucursal.Configuracion.numeroSucursal;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +45,8 @@ public class GestorXml {
                         Configuracion.puertoServidorEnvio=  Integer.parseInt(eElement.getElementsByTagName("puertoServidorEnvio").item(0).getTextContent());
                         Configuracion.IpServidorRecepcion=  eElement.getElementsByTagName("ipServidorRecepcion").item(0).getTextContent();
                         Configuracion.puertoServidorRecepcion=  Integer.parseInt(eElement.getElementsByTagName("puertoServidorRecepcion").item(0).getTextContent());
-                        
+                        Configuracion.transporteEnvio = new Transporte("envio",new ArrayList<Paquete>(),numeroSucursal,true);
+                        Configuracion.transporteRecepcion = new Transporte("Recepcion",new ArrayList<Paquete>(),numeroSucursal,true);
                 }
 	}
      catch (Exception e) {

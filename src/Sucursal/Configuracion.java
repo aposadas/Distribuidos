@@ -23,6 +23,6 @@ public class Configuracion {
    public static int puertoServidorRecepcion;
    public static ArrayList<Paquete> listaPaquetesRecibidos = new ArrayList<>();
    public static ArrayList<Paquete> listaPaquetesSucursalSiguiente = new ArrayList<>();
-   public static Transporte transporteEnvio = new Transporte("envio",new ArrayList<Paquete>());
-   public static Transporte tranporteRecepcion = new Transporte("recepcion", new ArrayList<Paquete>());
+   public static Transporte transporteEnvio;
+   public static Transporte transporteRecepcion;
 }

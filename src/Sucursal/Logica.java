@@ -38,13 +38,17 @@ public class Logica {
       XStream xstream = new XStream();
       xstream.alias("Transporte", Transporte.class);
       xstream.alias("Paquete",Paquete.class);
+      if (Configuracion.transporteEnvio.isDisponible())
+      {
       String transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
-        System.out.println("TransporteXML: " + transporteXML);
+        
       try {
             RemClient.remObjectEnvio.enviarPaquete(transporteXML);
         } catch (RemoteException ex) {
             Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
         }
+      }
+      ///modificar para que meta en la lista mientras tanto
     }
 
     //static ArrayList <String> obtenerSucursales() {

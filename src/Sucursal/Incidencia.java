@@ -11,8 +11,8 @@ import java.util.Date;
  * @author Aileen
  */
 public class Incidencia {
-    private int sucursal;
-    private Date momento;
+    private String sucursal;
+    private long momento;
     private String tipo;
     private String datos;
 
@@ -24,19 +24,19 @@ public class Incidencia {
         this.datos = datos;
     }
 
-    public Date getMomento() {
+    public long getMomento() {
         return momento;
     }
 
-    public void setMomento(Date momento) {
+    public void setMomento(long momento) {
         this.momento = momento;
     }
 
-    public int getSucursal() {
+    public String getSucursal() {
         return sucursal;
     }
 
-    public void setSucursal(int sucursal) {
+    public void setSucursal(String sucursal) {
         this.sucursal = sucursal;
     }
 
@@ -46,6 +46,13 @@ public class Incidencia {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Incidencia(String sucursal, long momento, String tipo, String datos) {
+        this.sucursal = sucursal;
+        this.momento = momento;
+        this.tipo = tipo;
+        this.datos = datos;
     }
     
     
