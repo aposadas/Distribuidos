@@ -4,6 +4,7 @@
  */
 package Sucursal;
 
+import com.thoughtworks.xstream.XStream;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,17 +25,23 @@ public class Logica {
       long tiempoCreacion= System.currentTimeMillis()/1000;
    
       
-      ArrayList <Paquete> paquetesRecibidos = GestorXml.obtenerPaquetesRecibidos();
+      ArrayList <Paquete> paquetesRecibidos = new ArrayList <>();//GestorXml.obtenerPaquetesRecibidos();
       
       int idPaqueteACrear;
-      if (paquetesRecibidos==null)
+      if (paquetesRecibidos.isEmpty())
         idPaqueteACrear = Integer.parseInt(Configuracion.numeroSucursal + Configuracion.numeroSucursalRecepcion) + 1;
       else
           idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
       
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
-        try {
-            RemClient.remObjectEnvio.enviarPaquete(paquete);
+      Configuracion.transporteEnvio.getListaPaquete().add(paquete); 
+      XStream xstream = new XStream();
+      xstream.alias("Transporte", Transporte.class);
+      xstream.alias("Paquete",Paquete.class);
+      String transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
+        System.out.println("TransporteXML: " + transporteXML);
+      try {
+            RemClient.remObjectEnvio.enviarPaquete(transporteXML);
         } catch (RemoteException ex) {
             Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -24,8 +24,6 @@ import java.util.logging.Logger;
  */
 public class RemImpl extends UnicastRemoteObject implements Rem {
     public String transporteXML;
-    
-    String transporte = "";
     public RemImpl() throws RemoteException 
     {
     
@@ -51,14 +49,26 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     
     
     @Override
-    public void enviarPaquete(Paquete paquete) throws RemoteException{
+    public void enviarPaquete(String transporte) throws RemoteException{
+      this.transporteXML = transporte;
+        System.out.println(transporte);
+        XStream xstream = new XStream ();
+        Transporte transportePaquetes =(Transporte) xstream.fromXML(transporte);
         
-       Configuracion.transporteEnvio.getListaPaquete().add(paquete); 
-       XStream xstream = new XStream();
-       xstream.alias("Transporte", Transporte.class);
-       this.transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
+       int tamanio =transportePaquetes.getListaPaquete().size();
+     
+       if (tamanio>0){
+        for (int j=0;j<tamanio+1;j++)
+         if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
+             transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(System.currentTimeMillis()/1000);
+             Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
+             transportePaquetes.getListaPaquete().remove(j);
+         }
+        //ELSE!!!!!!
+       }
+             
         try {
-            UnicastRemoteObject.exportObject(this,Configuracion.puertoServidorEnvio);
+            UnicastRemoteObject.exportObject(this);
         } catch (RemoteException ex) {
             Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,7 +78,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        
     }
     
-    public void reenviarPaqueteAjeno(Transporte transporteEnvio)throws RemoteException{
+    public void reenviarPaqueteAjeno(String transporteEnvio)throws RemoteException{
         
         try {
             UnicastRemoteObject.exportObject(this);

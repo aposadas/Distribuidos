@@ -39,35 +39,37 @@ public class RemClient {
             System.setSecurityManager(new RMISecurityManager());
             
             /// Me registro como cliente del Servidor Central
-            registroServidorCentral = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorCentral);
-            String hostCentral = Configuracion.ipServidorCentral;
+            //registroServidorCentral = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorCentral);
+           // String hostCentral = Configuracion.ipServidorCentral;
             // Get remote object and store it in remObject:
              //remObjectCentral = (Rem) Naming.lookup("//" + hostCentral + "/objetoServidorCentral");
            //// Fin registro Servidor Central.
            
            /// Registro como cliente del Servidor Recepción
-            registroServidorEnvio = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorEnvio);
+            registroServidorEnvio = LocateRegistry.getRegistry(Configuracion.IpServidorEnvio, Configuracion.puertoServidorEnvio);
             String hostEnvio =Configuracion.IpServidorEnvio;
             try {
-            remObjectEnvio = (Rem) Naming.lookup("//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalEnvio);
+            remObjectEnvio =  ((Rem) registroServidorEnvio.lookup("objetoServidor" + Configuracion.numeroSucursalEnvio));
+       
            //// Fin registro Servidor Recepcion.
             }
             catch (ConnectException e)
             {
             e.printStackTrace();
-                System.out.println( "REMOBJECTENVIO"+ "//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalEnvio);
+                System.out.println( "REMOBJECTENVIO: "+ "//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalEnvio);
             creo = false;
             }
             /// Registro como cliente del Servidor Envio
-            registroServidorRecepcion = LocateRegistry.getRegistry("localhost", Configuracion.puertoServidorRecepcion);
+            registroServidorRecepcion = LocateRegistry.getRegistry(Configuracion.IpServidorRecepcion, Configuracion.puertoServidorRecepcion);
             String hostRecepcion = Configuracion.IpServidorRecepcion;
             try {
-            remObjectRecepcion = (Rem) Naming.lookup("//" + hostRecepcion + "/objetoServidor" + Configuracion.numeroSucursalRecepcion);
+             remObjectRecepcion = ((Rem) registroServidorRecepcion.lookup("objetoServidor" + Configuracion.numeroSucursalRecepcion));
+            //remObjectRecepcion = (Rem) Naming.lookup("//" + hostRecepcion + "/objetoServidor" + Configuracion.numeroSucursalRecepcion);
            //// Fin registro Servidor Envio.
             }
             catch (ConnectException e){
             e.printStackTrace();
-             System.out.println( "REMOBJECRECEPCION"+ "//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalRecepcion);
+             System.out.println( "REMOBJECRECEPCION: "+ "//" + hostEnvio + "/objetoServidor" + Configuracion.numeroSucursalRecepcion);
             creo = false;
             }
             
@@ -83,10 +85,10 @@ public class RemClient {
         {
             System.out.println("NotBoundException: " + nbe);
         } 
-        catch(MalformedURLException mfe) 
+        /*catch(MalformedURLException mfe) 
         {
             System.out.println("MalformedURLException: "+ mfe);
-        }
+        }*/
      return creo;
      }
      

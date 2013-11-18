@@ -20,17 +20,12 @@ public class Main {
          GestorXml.obtenerConfiguracion();
          RemServer.CrearServidor();
         boolean creo = false;
-       
-        Menu menu = new Menu();
-         menu.setVisible(true);
-        int cont=0;
         while (!creo){
-           
         creo= RemClient.CrearClientes();
-        menu.setjLabel1(Integer.toString(Configuracion.puertoServidorEnvio) + cont);
-        cont++;
+  
         }
-         
+          Menu menu = new Menu();
+         menu.setVisible(true);
     }
     
 }

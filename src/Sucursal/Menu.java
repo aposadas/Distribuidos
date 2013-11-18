@@ -12,13 +12,6 @@ import javax.swing.JLabel;
  */
 public class Menu extends javax.swing.JFrame {
 
-    public JLabel getjLabel1() {
-        return jLabel1;
-    }
-
-    public void setjLabel1(String text) {
-        this.jLabel1.setText(text);
-    }
 
     
     /**
@@ -26,6 +19,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        this.jLabel1.setText("Bienvenido a la Sucursal #" + Configuracion.numeroSucursal + ", Seleccione un opcion:");
     }
 
     /**
