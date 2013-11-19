@@ -10,7 +10,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import sevidorcentralproysistemasdistribuidos.RemServidorCentral;
+import SevidorCentral.RemServidorCentral;
 
 
 
@@ -119,13 +119,14 @@ public class RemClient {
 
      
 
-     public static void enviarSucursalActiva(String ip, String numSucursal ){
+     public static void enviarSucursalActiva(String ip, String numSucursal, boolean activa ){
         try {
            
             RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
-            remServidorCentral.agregarSucursalActiva(ip, numSucursal);
+            remServidorCentral.agregarSucursalActiva(ip, numSucursal,activa);
+          if (activa){
             System.out.println("Se envio el ip :) " + numSucursal);
-
+          }
        
         } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
