@@ -82,6 +82,7 @@ public class Paquete {
         this.tiempoDeSalida = tiempoDeSalida;
         this.origen = origen;
         this.destino = destino;
+        this.listaIncidencia = new ArrayList<>();
     }
 
     public Paquete() {

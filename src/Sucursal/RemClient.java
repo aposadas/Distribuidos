@@ -5,13 +5,12 @@ package Sucursal;
 
 
 import java.net.MalformedURLException;
-import java.rmi.ConnectException;
-import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RMISecurityManager;
-import java.rmi.RemoteException;
+import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import sevidorcentralproysistemasdistribuidos.RemServidorCentral;
 
 
 
@@ -27,9 +26,33 @@ public class RemClient {
   private static Registry registroServidorCentral;
   private static Registry registroServidorEnvio;
   private static Registry registroServidorRecepcion;
-  public static Rem remObjectCentral;
+  public static RemServidorCentral remObjectCentral;
   public static Rem remObjectEnvio;
   public static Rem remObjectRecepcion;
+  
+  
+//PARA CREAR EL CLIENTE (SUCURSAL) QUE SE VA A COMUNICAR CON EL SERVER CENTRAL///
+  public static boolean CrearClienteServerCentral(){
+         boolean clienteServerCentral = true;
+         try {
+              System.setProperty("java.rmi.server.hostname", "localhost");   
+              System.setProperty("java.security.policy","file:files/politica.policy");
+              System.setSecurityManager(new RMISecurityManager());
+              
+                registroServidorCentral = LocateRegistry.getRegistry(Configuracion.ipServidorCentral, Configuracion.puertoServidorCentral);
+              
+                //remObjectCentral =  ((RemServidorCentral) registroServidorCentral.lookup("objetoServidorCentral"));
+              
+            } catch (RemoteException ex) {
+                Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+                clienteServerCentral= false;
+           } //catch (NotBoundException ex) {
+           //     Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+            //    clienteServerCentral= false;
+          //  }
+      return clienteServerCentral;
+      }
+ //PARA CREAR EL CLIENTE (SUCURSAL)///    
      public static boolean CrearClientes() throws ConnectException {
         boolean creo=true;
          try {
@@ -90,6 +113,23 @@ public class RemClient {
             System.out.println("MalformedURLException: "+ mfe);
         }*/
      return creo;
+     }
+ 
+// METODO PARA ENVIAR EL IP AL SERVIDOR CENTRAL, CAMBIAR LOCALHOST POR EL IP DEL SERVIDOR CUANDO LO TENGAMOS
+     public static void enviarIp(String ip){
+        try {
+           
+            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+            remServidorCentral.agregarSucursalActiva(ip);
+            System.out.println("Se envio el ip :)");
+       
+        } catch (NotBoundException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
      }
      
 }

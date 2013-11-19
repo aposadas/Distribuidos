@@ -47,11 +47,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jConsultarPaquetes.setText("Consultar paquetes");
-        jConsultarPaquetes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jConsultarPaquetesActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,16 +80,10 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBEnviarPaqueteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnviarPaqueteActionPerformed
-        EnviarPaquete enviarpaquetes= new EnviarPaquete();
+        EnviarPaquete enviarpaquete= new EnviarPaquete();
         this.dispose();
-        enviarpaquetes.setVisible(true);
+        enviarpaquete.setVisible(true);
     }//GEN-LAST:event_jBEnviarPaqueteActionPerformed
-
-    private void jConsultarPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConsultarPaquetesActionPerformed
-      ConsultarPaquetes consultarpaquetes = new ConsultarPaquetes();
-      this.dispose();
-      consultarpaquetes.setVisible(true);
-    }//GEN-LAST:event_jConsultarPaquetesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -39,10 +39,10 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
 
     
    
-    public Transporte pedirPaquetes() throws RemoteException {
-        
+    public void pedirPaquetes() throws RemoteException {
+       // RemClient.remObjectRecepcion.
              //Así aca podemos setear aca colocar el thread sleep de 5 seg         
-        return Configuracion.transporteRecepcion;
+        
         
     }
         
@@ -53,6 +53,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
      // this.transporteXML = transporte;
         System.out.println(transporte);
         XStream xstream = new XStream ();
+        xstream.alias("Transporte",Transporte.class);
+        xstream.alias("Paquete",Paquete.class);
         Transporte transportePaquetes =(Transporte) xstream.fromXML(transporte);
         
        int tamanio = transportePaquetes.getListaPaquete().size();
@@ -65,7 +67,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        //chequeo si el paquete es para esta o sucursal y lo agrego sino le agrego una incidencia y lo reenvio
        if (tamanio>0){
            
-        for (int j=0;j<tamanio+1;j++){
+        for (int j=0;j<tamanio;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
              transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(System.currentTimeMillis()/1000);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));

@@ -12,7 +12,7 @@ and open the template in the editor.
         <numeroSucursalEnvio>2</numeroSucursalEnvio>
         <numeroSucursalRecepcion>3</numeroSucursalRecepcion>
         <ipSevidorCentral>localhost</ipSevidorCentral>  
-        <puertoServidorCentral>1337</puertoServidorCentral>
+        <puertoServidorCentral>1099</puertoServidorCentral>
         <ipSevidorEnvio>localhost</ipSevidorEnvio>
         <puertoServidorEnvio>10002</puertoServidorEnvio>
         <ipServidorRecepcion>localhost</ipServidorRecepcion>
