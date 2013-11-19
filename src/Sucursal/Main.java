@@ -19,11 +19,13 @@ public class Main {
     public static void main(String[] args) throws AlreadyBoundException, ConnectException {
          GestorXml.obtenerConfiguracion();
          RemServer.CrearServidor();
+         RemClient.CrearClienteServerCentral();
         boolean creo = false;
-        while (!creo){
-        creo= RemClient.CrearClientes();
+        RemClient.enviarIp("192.168.1.101");
+       // while (!creo){
+       // creo= RemClient.CrearClientes();
   
-        }
+       // }
           Menu menu = new Menu();
          menu.setVisible(true);
     }
