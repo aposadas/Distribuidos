@@ -83,6 +83,7 @@ public class EnviarPaquete extends javax.swing.JFrame {
 
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_jBAceptarActionPerformed
         Logica.CrearPaquete((String) jCBlistaSucursales.getSelectedItem());
+        
     }//GEN-LAST:event_jBAceptarActionPerformed
 
     /**

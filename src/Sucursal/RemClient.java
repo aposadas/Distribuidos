@@ -137,4 +137,22 @@ public class RemClient {
         }
      }
     
+      public static void enviarPaqueteAServerCenral(Paquete paquete, boolean enviado){
+        try {
+          
+            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+            remServidorCentral.agregarPaquete(paquete, enviado);
+          
+       
+        } catch (NotBoundException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
+     
+     
 }

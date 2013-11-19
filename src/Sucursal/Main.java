@@ -24,7 +24,7 @@ public class Main {
          boolean creo = false;
          
          
- //Mandar al server central la info de la sucursal.       
+ //Mandar al server central la info de la sucursal.  Falta validar que se mande solo si creo.     
         RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal,true);
   
     

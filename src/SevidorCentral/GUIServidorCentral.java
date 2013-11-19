@@ -4,6 +4,7 @@
  */
 package SevidorCentral;
 
+import Sucursal.Paquete;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -49,7 +50,7 @@ public class GUIServidorCentral extends javax.swing.JFrame {
         jButtonDetallePaquete = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jListPaquetes1 = new javax.swing.JList();
+        jListPaquetes = new javax.swing.JList();
         jLabel19 = new javax.swing.JLabel();
         jButtonActualizarPaquetes = new javax.swing.JButton();
         jButtonVerTiempo = new javax.swing.JButton();
@@ -104,7 +105,7 @@ public class GUIServidorCentral extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(0, 0, 153));
         jLabel12.setText("Servidor Central");
 
-        jScrollPane3.setViewportView(jListPaquetes1);
+        jScrollPane3.setViewportView(jListPaquetes);
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -381,7 +382,7 @@ public class GUIServidorCentral extends javax.swing.JFrame {
      */
 
         private void actualizarSucursales(){
-        Iterator iterator = RemServidorCentralImpl.getSucursales().iterator(); 
+        Iterator iterator = RemServidorCentralImpl.getListaSucursales().iterator(); 
         DefaultListModel model = new DefaultListModel();
        
         while (iterator.hasNext()){
@@ -393,11 +394,14 @@ public class GUIServidorCentral extends javax.swing.JFrame {
     }
     
         private void actualizarPaquetes(){
-//        Iterator iterator = servidor.getListaPaquetes().iterator();
-//        DefaultListModel model = new DefaultListModel();
-//        while (iterator.hasNext())
-//            model.addElement(((Paquete)iterator.next()).getIpDestino());
-//        jListPaquetes.setModel(model);
+        Iterator iterator = RemServidorCentralImpl.getListaPaquetes().iterator();
+        DefaultListModel model = new DefaultListModel();
+        
+        while (iterator.hasNext()){
+            Paquete paquete = (Paquete) iterator.next();
+            model.addElement(paquete.getId()+ "origen: "+ paquete.getOrigen());
+        }
+        jListPaquetes.setModel(model);
     }
         
         private void detallePaquete(){
@@ -452,7 +456,7 @@ public class GUIServidorCentral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList jListPaquetes1;
+    private javax.swing.JList jListPaquetes;
     private javax.swing.JList jListSucursales;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

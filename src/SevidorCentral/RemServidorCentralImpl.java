@@ -4,6 +4,7 @@
  */
 package SevidorCentral;
 
+import Sucursal.Paquete;
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -15,26 +16,32 @@ import java.util.ArrayList;
  */
 public class RemServidorCentralImpl extends UnicastRemoteObject implements RemServidorCentral{
 
-    public static ArrayList<String> sucursales = new ArrayList<>();
+    public static ArrayList<String> listaSucursales = new ArrayList<>();
+    public static ArrayList<Paquete> listaPaquetes = new ArrayList<>();
+
+    public static ArrayList<String> getListaSucursales() {
+        return listaSucursales;
+    }
+     public static ArrayList<Paquete> getListaPaquetes() {
+        return listaPaquetes;
+    }
+      
 
     public RemServidorCentralImpl() throws RemoteException  {
         
     }
-      
+
+   
   
-    public static ArrayList<String> getSucursales() {
-       
-        return sucursales;
-    }
 
     @Override
     public void agregarSucursalActiva(String ipSucursal, String numSucursal, boolean activa) {
         if (activa == true){
-        sucursales.add("Sucursal "+numSucursal);
+        listaSucursales.add("Sucursal "+numSucursal);
         System.out.println("Se Agrego el  ip de las sucursal" + ipSucursal +" num sucursal "+ numSucursal);
         }
         else if (activa == false){
-        sucursales.remove("Sucursal "+numSucursal);
+        listaSucursales.remove("Sucursal "+numSucursal);
         
         }
         
@@ -49,9 +56,23 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
 
     @Override
     public ArrayList<String> listaSucursalActiva() throws RemoteException {
-        return sucursales;
+        return listaSucursales;
         
       
+    }
+
+    @Override
+    public void agregarPaquete(Paquete paquete, boolean enviado) throws RemoteException {
+        
+         if (enviado == true){
+        listaPaquetes.add(paquete);
+        System.out.println("Se Agrego el paquete" );
+        }
+        else if (enviado == false){
+        listaPaquetes.remove(paquete);
+        
+        }
+        
     }
     
   

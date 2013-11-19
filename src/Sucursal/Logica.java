@@ -35,6 +35,9 @@ public class Logica {
       
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
       Configuracion.transporteEnvio.getListaPaquete().add(paquete); 
+    //lo que agrege yo///  
+    //  RemClient.enviarPaqueteAServerCenral(paquete, true);
+     /////////
       XStream xstream = new XStream();
       xstream.alias("Transporte", Transporte.class);
       xstream.alias("Paquete",Paquete.class);
