@@ -24,11 +24,14 @@ public class Main {
          boolean creo = false;
  //Mandar IP DEL CLIENTE CREADO       
   
-        RemClient.enviarIp(Configuracion.IpServidorEnvio);
+
+        //RemClient.enviarIp(Configuracion.IpServidorEnvio);
         while (!creo){
         creo= RemClient.CrearClientes();
-  
         }
+        RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal);
+  
+        
           Menu menu = new Menu();
          menu.setVisible(true);
     }
