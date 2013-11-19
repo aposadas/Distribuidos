@@ -30,7 +30,9 @@ public class RemClient {
   public static Rem remObjectEnvio;
   public static Rem remObjectRecepcion;
   
-     public static boolean CrearClienteServerCentral(){
+  
+//PARA CREAR EL CLIENTE (SUCURSAL) QUE SE VA A COMUNICAR CON EL SERVER CENTRAL///
+  public static boolean CrearClienteServerCentral(){
          boolean clienteServerCentral = true;
          try {
               System.setProperty("java.rmi.server.hostname", "localhost");   
@@ -50,9 +52,7 @@ public class RemClient {
             }
       return clienteServerCentral;
       }
-     
-     
-     
+ //PARA CREAR EL CLIENTE (SUCURSAL)///    
      public static boolean CrearClientes() throws ConnectException {
         boolean creo=true;
          try {
@@ -114,14 +114,15 @@ public class RemClient {
         }*/
      return creo;
      }
-     
-     // ENVIA EL IP AL SERVIDOR CENTRAL, CAMBIAR LOCALHOST POR EL IP DEL SERVIDOR
+ 
+// METODO PARA ENVIAR EL IP AL SERVIDOR CENTRAL, CAMBIAR LOCALHOST POR EL IP DEL SERVIDOR CUANDO LO TENGAMOS
      public static void enviarIp(String ip){
         try {
-            RemServidorCentral remServidorCentral = (RemServidorCentral) 
-                     Naming.lookup("//localhost/"+"objetoServidorCentral");
+           
+            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
             remServidorCentral.agregarSucursalActiva(ip);
-            System.out.println("Se envio el ip");
+            System.out.println("Se envio el ip :)");
+       
         } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
