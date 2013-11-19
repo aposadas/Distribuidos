@@ -122,12 +122,14 @@ public class RemClient {
      public static void enviarSucursalActiva(String ip, String numSucursal, boolean activa ){
         try {
            
+           
             RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
-            remServidorCentral.agregarSucursalActiva(ip, numSucursal,activa);
-          if (activa){
-            System.out.println("Se envio el ip :) " + numSucursal);
-          }
-       
+            if ((remServidorCentral.verificarSucursal(numSucursal)) == true && (activa == true)) {
+                remServidorCentral.agregarSucursalActiva(ip, numSucursal,activa);
+                if (activa){
+                    System.out.println("Se envio el ip :) " + numSucursal);
+                }
+            }
         } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -137,6 +139,24 @@ public class RemClient {
         }
      }
     
+     
+     public static void eliminarSucursalActiva(String ip, String numSucursal ){
+        try {
+           
+           
+            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+            
+                remServidorCentral.eliminarSucursal(numSucursal);
+                
+        } catch (NotBoundException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     }
+     
       public static void enviarPaqueteAServerCenral(Paquete paquete, boolean enviado){
         try {
           

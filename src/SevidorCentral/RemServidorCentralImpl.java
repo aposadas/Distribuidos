@@ -9,6 +9,7 @@ import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -36,17 +37,16 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
 
     @Override
     public void agregarSucursalActiva(String ipSucursal, String numSucursal, boolean activa) {
-        if (activa == true){
+        
         listaSucursales.add("Sucursal "+numSucursal);
         System.out.println("Se Agrego el  ip de las sucursal" + ipSucursal +" num sucursal "+ numSucursal);
-        }
-        else if (activa == false){
-        listaSucursales.remove("Sucursal "+numSucursal);
-        
-        }
+       
+       
         
     }
 
+    
+    
     @Override
     public String getMessage() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -73,6 +73,24 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
         
         }
         
+    }
+
+    @Override
+    public boolean verificarSucursal(String ipNuevaSurcusal) throws RemoteException{
+        Iterator iterator = listaSucursales.iterator();
+        String ip;
+        while (iterator.hasNext()){
+             ip = iterator.next().toString();
+             if (ip.contains(ipNuevaSurcusal))
+                 return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void eliminarSucursal(String numSucursal) {
+        
+      listaSucursales.remove("Sucursal "+numSucursal);
     }
     
   

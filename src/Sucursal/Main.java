@@ -21,6 +21,8 @@ public class Main {
          RemServer.CrearServidor();
  //CREO LA CONEXION PARA EL SERVER CENTRAL
          RemClient.CrearClienteServerCentral();
+         
+         
          boolean creo = false;
          
          

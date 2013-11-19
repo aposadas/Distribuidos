@@ -131,7 +131,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButtonBorrarEjecucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarEjecucionActionPerformed
         // TODO add your handling code here:
-        RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal,false);
+        RemClient.eliminarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal);
         Runtime.getRuntime().exit(0);
         
     }//GEN-LAST:event_jButtonBorrarEjecucionActionPerformed
