@@ -24,7 +24,7 @@ public class Main {
          boolean creo = false;
  //Mandar IP DEL CLIENTE CREADO       
   
-        RemClient.enviarIp(Configuracion.IpServidorEnvio);
+        RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal);
        // while (!creo){
        // creo= RemClient.CrearClientes();
   
