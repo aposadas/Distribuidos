@@ -47,7 +47,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jConsultarPaquetes.setText("Consultar paquetes");
-
+        jConsultarPaquetes.addActionListener(new java.awt.event.ActionListener(){
+        public void actionPerformed(java.awt.event.ActionEvent evt){
+            jConsultarPaquetesActionPerformed(evt);
+        }
+        });
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,7 +88,12 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
         enviarpaquete.setVisible(true);
     }//GEN-LAST:event_jBEnviarPaqueteActionPerformed
-
+    
+    private void jConsultarPaquetesActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        ConsultarPaquetes consultarpaquetes= new ConsultarPaquetes();
+        this.dispose();
+        consultarpaquetes.setVisible(true);
+    } 
     /**
      * @param args the command line arguments
      */

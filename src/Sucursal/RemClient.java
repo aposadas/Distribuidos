@@ -117,19 +117,19 @@ public class RemClient {
  
 // METODO PARA ENVIAR EL IP AL SERVIDOR CENTRAL, CAMBIAR LOCALHOST POR EL IP DEL SERVIDOR CUANDO LO TENGAMOS
      public static void enviarIp(String ip){
-        try {
+        //try {
            
-            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
-            remServidorCentral.agregarSucursalActiva(ip);
+//            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+        //    remServidorCentral.agregarSucursalActiva(ip);
             System.out.println("Se envio el ip :)");
        
-        } catch (NotBoundException ex) {
+       /* } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
      }
-     
+    
 }

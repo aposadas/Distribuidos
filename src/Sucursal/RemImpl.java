@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import Sucursal.Paquete;
 import Sucursal.Transporte;
 import com.thoughtworks.xstream.XStream;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,11 +61,11 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         Transporte transportePaquetes =(Transporte) xstream.fromXML(transporte);
         
        int tamanio = transportePaquetes.getListaPaquete().size();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       final Lock lock = new ReentrantLock();
+       final Condition TiempoCumplido = lock.newCondition();
+       
+       
+       
        
        //chequeo si el paquete es para esta o sucursal y lo agrego sino le agrego una incidencia y lo reenvio
        if (tamanio>0){
@@ -73,11 +76,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
              transportePaquetes.getListaPaquete().remove(j);
              //duerme 10 segundos
-             try {
-                 Thread.sleep(10000);
-             } catch (InterruptedException ex) {
-                 Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
-             }
+             
          }
          else {
                 Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasó por la sucursal: " + Configuracion.numeroSucursal);

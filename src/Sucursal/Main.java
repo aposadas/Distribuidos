@@ -25,10 +25,10 @@ public class Main {
  //Mandar IP DEL CLIENTE CREADO       
   
         RemClient.enviarIp(Configuracion.IpServidorEnvio);
-       // while (!creo){
-       // creo= RemClient.CrearClientes();
+        while (!creo){
+        creo= RemClient.CrearClientes();
   
-       // }
+        }
           Menu menu = new Menu();
          menu.setVisible(true);
     }
