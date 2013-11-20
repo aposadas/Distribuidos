@@ -73,7 +73,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        int tamanio = transportePaquetes.getListaPaquete().size();
        ArrayList<Paquete> listaPaquetesAux = new ArrayList<>();
        
-       
+       long tiempo;
+       tiempo =RemClient.pedirReloj();
        //chequeo si el paquete es para esta o sucursal y lo agrego sino le agrego una incidencia y lo reenvio
        
        if (!transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal)){
@@ -82,7 +83,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         for (int j=0;j<tamanio;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
              listaPaquetesAux.add(transportePaquetes.getListaPaquete().get(j));
-             transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(System.currentTimeMillis()/1000);
+             tiempo= tiempo+11;
+             transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(tiempo);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
              Paquete paquete = transportePaquetes.getListaPaquete().get(j);
              //duerme 10 segundos
@@ -95,8 +97,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         
         else 
         {
-             
-               Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasÃ³ por la sucursal: " + Configuracion.numeroSucursal);
+             tiempo++;
+               Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,tiempo,"Traslado","El paquete pasÃ³ por la sucursal: " + Configuracion.numeroSucursal);
                 transportePaquetes.getListaPaquete().get(j).getListaIncidencia().add(incidencia);
                 //agregar espera de tiempo
                  
@@ -142,7 +144,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         
        }
        
-   
+   RemClient.actualizarHoraServerCentral(tiempo);
        
     }
     
