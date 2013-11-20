@@ -28,7 +28,7 @@ public class GestorXml {
 	DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	Document doc = dBuilder.parse(fXmlFile);
 	doc.getDocumentElement().normalize();
-	NodeList nList = doc.getElementsByTagName("Configuracion");
+	NodeList nList = doc.getElementsByTagName("Configuracion"); 
 
 		Node nNode = nList.item(0);
 

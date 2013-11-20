@@ -33,6 +33,7 @@ public class EnviarPaquete extends javax.swing.JFrame {
         jBAceptar = new javax.swing.JButton();
         jCBlistaSucursales = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jBVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,6 +50,13 @@ public class EnviarPaquete extends javax.swing.JFrame {
 
         jLabel2.setText("Sucursales:");
 
+        jBVolver.setText("Volver");
+        jBVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -59,9 +67,10 @@ public class EnviarPaquete extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBAceptar)
-                        .addComponent(jCBlistaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jBAceptar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCBlistaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(149, 149, 149))
         );
         layout.setVerticalGroup(
@@ -73,9 +82,11 @@ public class EnviarPaquete extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBlistaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addGap(80, 80, 80)
                 .addComponent(jBAceptar)
-                .addGap(80, 80, 80))
+                .addGap(31, 31, 31)
+                .addComponent(jBVolver)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -85,6 +96,13 @@ public class EnviarPaquete extends javax.swing.JFrame {
         Logica.CrearPaquete((String) jCBlistaSucursales.getSelectedItem());
         
     }//GEN-LAST:event_jBAceptarActionPerformed
+
+    private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
+        Menu menu = new Menu();
+        this.dispose();
+        menu.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,6 +147,7 @@ public class EnviarPaquete extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAceptar;
+    private javax.swing.JButton jBVolver;
     private javax.swing.JComboBox jCBlistaSucursales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
