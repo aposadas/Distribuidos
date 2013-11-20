@@ -162,9 +162,7 @@ public class RemClient {
           
             RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
             remServidorCentral.agregarPaquete(paquete, enviado);
-          
-       
-        } catch (NotBoundException ex) {
+              } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
