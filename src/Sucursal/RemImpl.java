@@ -79,11 +79,18 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
            
         for (int j=0;j<tamanio;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
+            
              transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(System.currentTimeMillis()/1000);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
+    Paquete paquete = transportePaquetes.getListaPaquete().get(j);
+             
              transportePaquetes.getListaPaquete().remove(j);
              //duerme 10 segundos
-             
+     
+     String paqueteXML = xstream.toXML(paquete);
+     RemClient.enviarPaqueteAServerCenral(paqueteXML,true);
+              
+     System.out.println("se mando el paquete");
          }
          else {
                 Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasó por la sucursal: " + Configuracion.numeroSucursal);

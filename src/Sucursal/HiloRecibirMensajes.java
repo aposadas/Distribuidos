@@ -33,6 +33,11 @@ public class HiloRecibirMensajes extends Thread {
                     paquete.setTiempoDeLlegada(System.currentTimeMillis()/1000);
                     Configuracion.listaPaquetesRecibidos.add(paquete);
                     transporte_paquete.getListaPaquete().remove(i);
+  
+     String paqueteXML = xstream.toXML(paquete);
+     RemClient.enviarPaqueteAServerCenral(paqueteXML,true);
+                    
+                    
                 }
                 transporte = xstream.toXML(transporte_paquete);
                 RemClient.remObjectRecepcion.reenviarTransporteAjeno(transporte);

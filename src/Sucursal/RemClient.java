@@ -157,11 +157,12 @@ public class RemClient {
         }
      }
      
-      public static void enviarPaqueteAServerCenral(Paquete paquete, boolean enviado){
+      public static void enviarPaqueteAServerCenral(String paquete, boolean enviado){
         try {
           
             RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
             remServidorCentral.agregarPaquete(paquete, enviado);
+            
               } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {

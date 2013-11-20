@@ -5,6 +5,7 @@
 package SevidorCentral;
 
 import Sucursal.Paquete;
+import com.thoughtworks.xstream.XStream;
 import java.lang.reflect.Array;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -38,7 +39,7 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
     @Override
     public void agregarSucursalActiva(String ipSucursal, String numSucursal, boolean activa) {
         
-        listaSucursales.add("Sucursal "+numSucursal);
+        listaSucursales.add("Sucursal "+ numSucursal);
         System.out.println("Se Agrego el  ip de las sucursal" + ipSucursal +" num sucursal "+ numSucursal);
        
        
@@ -62,16 +63,18 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
     }
 
     @Override
-    public void agregarPaquete(Paquete paquete, boolean enviado) throws RemoteException {
+    public void agregarPaquete(String paquete, boolean enviado) throws RemoteException {
         
          if (enviado == true){
-        listaPaquetes.add(paquete);
+             
+             XStream xstream = new XStream();
+             xstream.alias("Paquete", Paquete.class);
+             Paquete paqueteRecibido= (Paquete) xstream.fromXML(paquete);
+             
+        listaPaquetes.add(paqueteRecibido);
         System.out.println("Se Agrego el paquete" );
         }
-        else if (enviado == false){
-        listaPaquetes.remove(paquete);
-        
-        }
+      
         
     }
 

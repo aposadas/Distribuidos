@@ -33,6 +33,7 @@ public class Logica {
       else
           idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
       
+      ArrayList <Incidencia> listaIncidencia = new ArrayList <>();
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
 
 
@@ -51,8 +52,6 @@ public class Logica {
             try {
              RemClient.remObjectEnvio.enviarPaquete(transporteXML);
              
-                   RemClient.enviarPaqueteAServerCenral(paquete, true);
-     System.out.println("se mando el paquete");
              
              } catch (RemoteException ex) {
                 Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);

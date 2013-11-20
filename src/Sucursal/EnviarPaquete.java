@@ -34,59 +34,85 @@ public class EnviarPaquete extends javax.swing.JFrame {
         jCBlistaSucursales = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jBVolver = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/send.png"))); // NOI18N
         jLabel1.setText("Enviar Paquete");
 
-        jBAceptar.setText("Aceptar");
+        jBAceptar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/1384979032_mail-send.png"))); // NOI18N
+        jBAceptar.setText(" Aceptar");
+        jBAceptar.setToolTipText("");
         jBAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAceptarActionPerformed(evt);
             }
         });
 
+        jCBlistaSucursales.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jCBlistaSucursales.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
 
-        jLabel2.setText("Sucursales:");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Sucursal que desea enviar:");
 
-        jBVolver.setText("Volver");
+        jBVolver.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/back2.png"))); // NOI18N
+        jBVolver.setText(" Volver");
         jBVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBVolverActionPerformed(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 153));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(53, 53, 53)
+                .addGap(18, 18, 18)
+                .addComponent(jCBlistaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jBAceptar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jCBlistaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jBVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(149, 149, 149))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(jBVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(133, 133, 133)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(153, 153, 153)
+                        .addComponent(jBAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(37, 37, 37)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCBlistaSucursales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(80, 80, 80)
-                .addComponent(jBAceptar)
-                .addGap(31, 31, 31)
-                .addComponent(jBVolver)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(jBAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
 
         pack();
@@ -94,7 +120,7 @@ public class EnviarPaquete extends javax.swing.JFrame {
 
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_jBAceptarActionPerformed
         Logica.CrearPaquete((String) jCBlistaSucursales.getSelectedItem());
-        
+        this.jLabel3.setText("Mensaje enviado a la sucursal "+jCBlistaSucursales.getSelectedItem() );
     }//GEN-LAST:event_jBAceptarActionPerformed
 
     private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
@@ -144,6 +170,8 @@ public class EnviarPaquete extends javax.swing.JFrame {
                 new EnviarPaquete().setVisible(true);
             }
         });
+       
+        
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAceptar;
@@ -151,5 +179,6 @@ public class EnviarPaquete extends javax.swing.JFrame {
     private javax.swing.JComboBox jCBlistaSucursales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

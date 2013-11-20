@@ -149,8 +149,8 @@ public class DetalleTraza extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(76, 76, 76))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonRegresar)
                         .addContainerGap())))
@@ -231,17 +231,18 @@ public class DetalleTraza extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTiempoActionPerformed
-        // TODO add your handling code here:
-        if (jList1.isSelectionEmpty()==false)
-            detalleSucursal();
-    }//GEN-LAST:event_jButtonTiempoActionPerformed
-
     private void jButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegresarActionPerformed
         // TODO add your handling code here:
         this.ventanaPadre.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegresarActionPerformed
+
+    private void jButtonTiempoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTiempoActionPerformed
+        // TODO add your handling code here:
+        if (jList1.isSelectionEmpty() == false) {
+            detalleSucursal();
+        }
+    }//GEN-LAST:event_jButtonTiempoActionPerformed
     
     
     private void iniciar(){
@@ -255,12 +256,27 @@ public class DetalleTraza extends javax.swing.JFrame {
         jLabelHoraLLegada.setText(String.valueOf(paquete.getTiempoDeLlegada()));
         
         DefaultListModel model = new DefaultListModel();
-        Iterator iterator = paquete.getListaIncidencia().iterator();
-        while (iterator.hasNext()){
-            model.addElement(((Incidencia)iterator.next()).getSucursal());
-        }
-        jList1.setModel(model);  
         
+        
+       if (paquete.getListaIncidencia().isEmpty() == true){
+       
+        model.addElement("Sucursal " +paquete.getOrigen()+ " Tiempo: " + paquete.getTiempoDeSalida()+ " -->");
+        model.addElement("Sucursal " + paquete.getDestino()+ " Tiempo: " + paquete.getTiempoDeLlegada());
+        jList1.setModel(model);  
+       
+       }
+       else{
+        Iterator iterator = paquete.getListaIncidencia().iterator();
+        model.addElement(paquete.getOrigen()+ " tiempo: " + paquete.getTiempoDeSalida()+ " -->");
+        while (iterator.hasNext()){
+            Incidencia incidencia = (Incidencia) iterator.next();
+            String sucursal = incidencia.getSucursal();
+            String tiempo = String.valueOf(incidencia.getMomento());
+            model.addElement("--> Sucursal " + sucursal + " tiempo: " + tiempo + " -->");
+        }
+        model.addElement(paquete.getDestino()+ " tiempo: " + paquete.getTiempoDeLlegada());
+        jList1.setModel(model);  
+       }
     }
     
     private void detalleSucursal(){

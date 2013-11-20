@@ -399,33 +399,34 @@ public class GUIServidorCentral extends javax.swing.JFrame {
         
         while (iterator.hasNext()){
             Paquete paquete = (Paquete) iterator.next();
-            model.addElement(paquete.getId()+ "origen: "+ paquete.getOrigen());
+            model.addElement("Id: "+ paquete.getId()+ "De Sucursal "+ paquete.getOrigen()+ "a Sucursal "+paquete.getDestino());
         }
         jListPaquetes.setModel(model);
     }
         
         private void detallePaquete(){
-//        if (jListPaquetes.isSelectionEmpty()==false){
-//            Paquete paquete = servidor.getListaPaquetes().get(jListPaquetes.getSelectedIndex());
-//          
-                 //new DetallePaquete(this, paquete).setVisible(true);
-//        }
+            
+        if (jListPaquetes.isSelectionEmpty()==false){
+            Paquete paquete = RemServidorCentralImpl.getListaPaquetes().get(jListPaquetes.getSelectedIndex());
+          
+                 new DetallePaquete(this, paquete).setVisible(true);
+        }
     }
         
              private void verEstadistica(){
-//        if (jListPaquetes.isSelectionEmpty()==false){
-//            Paquete paquete = servidor.getListaPaquetes().get(jListPaquetes.getSelectedIndex());
-//            
-                 //new DetalleEstadisticaTiempo(this, paquete).setVisible(true);
-//        }
+        if (jListPaquetes.isSelectionEmpty()==false){
+            Paquete paquete = RemServidorCentralImpl.getListaPaquetes().get(jListPaquetes.getSelectedIndex());
+            
+                 new DetalleEstadisticaTiempo(this, paquete).setVisible(true);
+        }
     }   
         
              private void verTraza(){
-//        if (jListPaquetes.isSelectionEmpty()==false){
-//            Paquete paquete = servidor.getListaPaquetes().get(jListPaquetes.getSelectedIndex());
-//            
-                 //new DetalleTraza(this, paquete).setVisible(true);
-//        }
+        if (jListPaquetes.isSelectionEmpty()==false){
+            Paquete paquete = RemServidorCentralImpl.getListaPaquetes().get(jListPaquetes.getSelectedIndex());
+            
+                 new DetalleTraza(this, paquete).setVisible(true);
+        }
     }      
 
      private void colapsoSucursal(){
