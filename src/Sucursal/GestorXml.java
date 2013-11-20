@@ -30,6 +30,7 @@ public class GestorXml {
 	doc.getDocumentElement().normalize();
 	NodeList nList = doc.getElementsByTagName("Configuracion");
         
+        
 		Node nNode = nList.item(0);
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
