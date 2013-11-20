@@ -39,24 +39,26 @@ public class Logica {
       
       if (!paquete.getDestino().equals(Configuracion.numeroSucursalEnvio)){
       //ARREGLAR MOVER A LISTA
-      Configuracion.transporteEnvio.getListaPaquete().add(paquete);
+        Configuracion.transporteEnvio.getListaPaquete().add(paquete);
 
     //lo que agrege yo///  
     //  RemClient.enviarPaqueteAServerCenral(paquete, true);
      /////////  
-      XStream xstream = new XStream();
-      xstream.alias("Transporte", Transporte.class);
-      xstream.alias("Paquete",Paquete.class);
-      if (Configuracion.transporteEnvio.isDisponible())
-      {
-      String transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
+        XStream xstream = new XStream();
+        xstream.alias("Transporte", Transporte.class);
+        xstream.alias("Paquete",Paquete.class);
+        if (Configuracion.transporteEnvio.isDisponible())
+            {
+            String transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
         
-      try {
-            RemClient.remObjectEnvio.enviarPaquete(transporteXML);
-        } catch (RemoteException ex) {
-            Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      }
+            try {
+             RemClient.remObjectEnvio.enviarPaquete(transporteXML);
+             } catch (RemoteException ex) {
+                Logger.getLogger(Logica.class.getName()).log(Level.SEVERE, null, ex);
+                } 
+            }
+        else
+          Configuracion.listaPaquetesAEnviar.add(paquete);
       ///modificar para que meta en la lista mientras tanto
     }
       else 

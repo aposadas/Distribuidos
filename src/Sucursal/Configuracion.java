@@ -22,7 +22,7 @@ public class Configuracion {
    public static String IpServidorRecepcion;
    public static int puertoServidorRecepcion;
    public static ArrayList<Paquete> listaPaquetesRecibidos = new ArrayList<>();
-   public static ArrayList<Paquete> listaPaquetesSucursalSiguiente = new ArrayList<>();
+   public static ArrayList<Paquete> listaPaquetesAEnviar = new ArrayList<>();
    public static Transporte transporteEnvio;
    public static Transporte transporteRecepcion;
    
