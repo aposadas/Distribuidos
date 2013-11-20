@@ -24,7 +24,7 @@ public class Logica {
     public static void CrearPaquete(String destino) {
       long tiempoCreacion= System.currentTimeMillis()/1000;
    
-      
+        System.out.println(Configuracion.transporteEnvio.isDisponible());
       ArrayList <Paquete> paquetesRecibidos = new ArrayList <>();//GestorXml.obtenerPaquetesRecibidos();
       
       int idPaqueteACrear;
@@ -39,16 +39,19 @@ public class Logica {
 
      
       if (!paquete.getDestino().equals(Configuracion.numeroSucursalEnvio)){
-      //ARREGLAR MOVER A LISTA
-        Configuracion.transporteEnvio.getListaPaquete().add(paquete);
-    
+        
+
+        
         XStream xstream = new XStream();
         xstream.alias("Transporte", Transporte.class);
         xstream.alias("Paquete",Paquete.class);
-        if (Configuracion.transporteEnvio.isDisponible())
-            {
-            String transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
         
+        if (Configuracion.transporteEnvio.isDisponible()&& Configuracion.transporteEnvio.getListaPaquete().size()<2)
+            {
+                Configuracion.transporteEnvio.getListaPaquete().add(paquete);
+                String transporteXML  = xstream.toXML(Configuracion.transporteEnvio);
+                Configuracion.transporteEnvio.setDisponible(false);
+                Configuracion.transporteEnvio.getListaPaquete().remove(paquete);
             try {
              RemClient.remObjectEnvio.enviarPaquete(transporteXML);
              
@@ -59,18 +62,17 @@ public class Logica {
             }
         else
           Configuracion.listaPaquetesAEnviar.add(paquete);
-      ///modificar para que meta en la lista mientras tanto
+   
     }
       else 
-          Configuracion.transporteRecepcion.getListaPaquete().add(paquete);
+          if (Configuracion.transporteRecepcion.isDisponible() && Configuracion.transporteRecepcion.getListaPaquete().size()<2)
+                Configuracion.transporteRecepcion.getListaPaquete().add(paquete);
+          else
+                Configuracion.listaPaquetesAEnviar.add(paquete);
     }
     //static ArrayList <String> obtenerSucursales() {
      
    // }
-    
-    public static void agregarPaquete(Paquete paquete, Transporte transporte){
-    transporte.getListaPaquete().add(paquete);
-
-    }
+ 
     
 }

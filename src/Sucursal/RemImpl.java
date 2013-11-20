@@ -71,59 +71,83 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         Transporte transportePaquetes =(Transporte) xstream.fromXML(transporte);
         
        int tamanio = transportePaquetes.getListaPaquete().size();
-       
+       ArrayList<Paquete> listaPaquetesAux = new ArrayList<>();
        
        
        //chequeo si el paquete es para esta o sucursal y lo agrego sino le agrego una incidencia y lo reenvio
+       
+       if (!transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal)){
        if (tamanio>0){
            
         for (int j=0;j<tamanio;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
-            
+             listaPaquetesAux.add(transportePaquetes.getListaPaquete().get(j));
              transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(System.currentTimeMillis()/1000);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
-    Paquete paquete = transportePaquetes.getListaPaquete().get(j);
-             
-             transportePaquetes.getListaPaquete().remove(j);
+             Paquete paquete = transportePaquetes.getListaPaquete().get(j);
              //duerme 10 segundos
-     
-     String paqueteXML = xstream.toXML(paquete);
-     RemClient.enviarPaqueteAServerCenral(paqueteXML,true);
-              
-     System.out.println("se mando el paquete");
+             String paqueteXML = xstream.toXML(paquete);
+             RemClient.enviarPaqueteAServerCenral(paqueteXML,true);
+             System.out.println("se mando el paquete");
+             
          }
-         else {
-                Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasó por la sucursal: " + Configuracion.numeroSucursal);
+         
+        
+        else 
+        {
+             
+               Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasó por la sucursal: " + Configuracion.numeroSucursal);
                 transportePaquetes.getListaPaquete().get(j).getListaIncidencia().add(incidencia);
                 //agregar espera de tiempo
-         }
+                 
+              }
         }
+       
+      
        }
-        transporte = xstream.toXML(transportePaquetes);
+        transportePaquetes.getListaPaquete().removeAll(listaPaquetesAux);
+       
         
+        transporte = xstream.toXML(transportePaquetes);
+           System.out.println("HEYYYYY" + transporte);
+       
+         RemClient.remObjectEnvio.enviarPaquete(transporte);
+       }
         //chequeo si estoy en la misma sucursal de donde salí.
+           
        if (transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal))
-       { Configuracion.transporteEnvio.setDisponible(true);
+       { 
+           
+          
+           Configuracion.transporteEnvio.setDisponible(true);
         
            for (int i = 0; i < Configuracion.listaPaquetesAEnviar.size(); i++) {
-               
-           
+            if (!Configuracion.listaPaquetesAEnviar.get(i).getDestino().equals(Configuracion.numeroSucursalEnvio))
+            {
         transportePaquetes.getListaPaquete().add(Configuracion.listaPaquetesAEnviar.get(i));
-        Configuracion.listaPaquetesAEnviar.remove(i);
-        transporte = xstream.toXML(transportePaquetes);
-        RemClient.remObjectEnvio.enviarPaquete(transporte);
+       listaPaquetesAux.add(Configuracion.listaPaquetesAEnviar.get(i));
+        
+            }
            }
+        Configuracion.listaPaquetesAEnviar.removeAll(listaPaquetesAux);
+        
+        transporte = xstream.toXML(transportePaquetes);   
+           System.out.println("EPAAAA" + transporte);
+        if (!transportePaquetes.getListaPaquete().isEmpty()){
+            transporte = xstream.toXML(transportePaquetes);
+            
+            RemClient.remObjectEnvio.enviarPaquete(transporte);
+            Configuracion.transporteEnvio.setDisponible(false);
+        }  
+        
        }
        
-       else {
-       RemClient.remObjectEnvio.enviarPaquete(transporte);
-       }
-             
-    } 
+   
        
-    
+    }
     
     public void reenviarTransporteAjeno(String transporteRecepcion)throws RemoteException{
+    ArrayList <Paquete> listaPaqueteAux = new ArrayList<>();
     XStream xstream =new XStream();    
     xstream.alias("Transporte", Transporte.class);
     xstream.alias("Paquete", Transporte.class);
@@ -132,6 +156,17 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     if (transporte.getSucursal().equals(Configuracion.numeroSucursal))
      {
      Configuracion.transporteRecepcion = transporte;
+     
+     for (int i=0;i<Configuracion.listaPaquetesAEnviar.size();i++)
+     {
+         if (Configuracion.listaPaquetesAEnviar.get(i).getDestino().equals(Configuracion.numeroSucursalEnvio)){
+             Configuracion.transporteRecepcion.getListaPaquete().add(Configuracion.listaPaquetesAEnviar.get(i));
+            
+             listaPaqueteAux.add(Configuracion.listaPaquetesAEnviar.get(i));
+         }
+     }
+         Configuracion.listaPaquetesAEnviar.removeAll(listaPaqueteAux);
+         Configuracion.transporteRecepcion.setDisponible(true);
      
      }
     else {

@@ -6,6 +6,7 @@ package Sucursal;
 
 import com.thoughtworks.xstream.XStream;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ public class HiloRecibirMensajes extends Thread {
     @Override
     public void run(){
         while(1==1){
+        ArrayList <Paquete> listaPaqueteAux = new ArrayList<>();
         try {
             String transporte= RemClient.remObjectRecepcion.pedirPaquetes(Configuracion.numeroSucursal);
            
@@ -32,13 +34,15 @@ public class HiloRecibirMensajes extends Thread {
                     Paquete paquete = transporte_paquete.getListaPaquete().get(i);
                     paquete.setTiempoDeLlegada(System.currentTimeMillis()/1000);
                     Configuracion.listaPaquetesRecibidos.add(paquete);
-                    transporte_paquete.getListaPaquete().remove(i);
+                    listaPaqueteAux.add(transporte_paquete.getListaPaquete().get(i));
+                    
   
      String paqueteXML = xstream.toXML(paquete);
      RemClient.enviarPaqueteAServerCenral(paqueteXML,true);
                     
                     
                 }
+                transporte_paquete.getListaPaquete().removeAll(listaPaqueteAux);
                 transporte = xstream.toXML(transporte_paquete);
                 RemClient.remObjectRecepcion.reenviarTransporteAjeno(transporte);
             }
