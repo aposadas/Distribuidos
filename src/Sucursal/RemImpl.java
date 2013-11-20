@@ -42,11 +42,19 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
 
     
    
-    public void pedirPaquetes() throws RemoteException {
+    public String pedirPaquetes(String sucursal) throws RemoteException {
        // RemClient.remObjectRecepcion.
              //Así aca podemos setear aca colocar el thread sleep de 5 seg         
-        
-        
+        if (Configuracion.transporteRecepcion.isDisponible() && !Configuracion.transporteRecepcion.getListaPaquete().isEmpty())
+        {
+        XStream xstream = new XStream();
+        xstream.alias("Transporte", Transporte.class);
+        xstream.alias("Paquete",Paquete.class);
+        Configuracion.transporteRecepcion.setDisponible(false);
+        String transporte = xstream.toXML(Configuracion.transporteRecepcion);
+        return transporte;
+        }
+        return null;
     }
         
     
@@ -99,13 +107,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        
     
     
-    public void reenviarPaqueteAjeno(String transporteEnvio)throws RemoteException{
+    public void reenviarTransporteAjeno(String transporteRecepcion)throws RemoteException{
         
-        try {
-            UnicastRemoteObject.exportObject(this);
-        } catch (RemoteException ex) {
-            Logger.getLogger(RemImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
     
     
     

@@ -41,15 +41,15 @@ public class RemClient {
               
                 registroServidorCentral = LocateRegistry.getRegistry(Configuracion.ipServidorCentral, Configuracion.puertoServidorCentral);
               
-                //remObjectCentral =  ((RemServidorCentral) registroServidorCentral.lookup("objetoServidorCentral"));
+                remObjectCentral =  ((RemServidorCentral) registroServidorCentral.lookup("objetoServidorCentral"));
               
             } catch (RemoteException ex) {
                 Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
                 clienteServerCentral= false;
-           } //catch (NotBoundException ex) {
-           //     Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
-            //    clienteServerCentral= false;
-          //  }
+           } catch (NotBoundException ex) {
+              Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+               clienteServerCentral= false;
+            }
       return clienteServerCentral;
       }
  //PARA CREAR EL CLIENTE (SUCURSAL)///    
@@ -122,8 +122,8 @@ public class RemClient {
      public static void enviarSucursalActiva(String ip, String numSucursal ){
         try {
            
-            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
-            remServidorCentral.agregarSucursalActiva(ip, numSucursal);
+          RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+          remServidorCentral.agregarSucursalActiva(ip, numSucursal);
             System.out.println("Se envio el ip :) " + numSucursal);
 
        

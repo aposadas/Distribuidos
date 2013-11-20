@@ -14,9 +14,9 @@ import Sucursal.Transporte;
  */
 public interface Rem extends java.rmi.Remote {
     public String getMessage() throws RemoteException;
-    public void pedirPaquetes() throws RemoteException;
+    public String pedirPaquetes(String sucursal) throws RemoteException;
     public void enviarPaquete(String paquete)throws RemoteException;
-    public void reenviarPaqueteAjeno (String tasnporteEnvio) throws RemoteException;
+    public void reenviarTransporteAjeno (String tasnporteRecepcion) throws RemoteException;
     
     
 }
