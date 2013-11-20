@@ -34,7 +34,11 @@ public class Logica {
           idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
       
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
-      Configuracion.transporteEnvio.getListaPaquete().add(paquete); 
+       
+      
+      if (!paquete.getDestino().equals(Configuracion.numeroSucursalEnvio)){
+      //ARREGLAR MOVER A LISTA
+      Configuracion.transporteEnvio.getListaPaquete().add(paquete);
       XStream xstream = new XStream();
       xstream.alias("Transporte", Transporte.class);
       xstream.alias("Paquete",Paquete.class);
@@ -50,7 +54,8 @@ public class Logica {
       }
       ///modificar para que meta en la lista mientras tanto
     }
-
+      else Configuracion.transporteRecepcion.getListaPaquete().add(paquete);
+    }
     //static ArrayList <String> obtenerSucursales() {
      
    // }
