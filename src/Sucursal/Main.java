@@ -36,6 +36,8 @@ public class Main {
         
           Menu menu = new Menu();
          menu.setVisible(true);
+         HiloRecibirMensajes hilorecepcion = new HiloRecibirMensajes();
+         hilorecepcion.start();
     }
     
 }

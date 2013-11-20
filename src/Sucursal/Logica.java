@@ -59,7 +59,8 @@ public class Logica {
       }
       ///modificar para que meta en la lista mientras tanto
     }
-      else Configuracion.transporteRecepcion.getListaPaquete().add(paquete);
+      else 
+          Configuracion.transporteRecepcion.getListaPaquete().add(paquete);
     }
     //static ArrayList <String> obtenerSucursales() {
      

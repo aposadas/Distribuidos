@@ -45,8 +45,10 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     public String pedirPaquetes(String Transporte) throws RemoteException {
        // RemClient.remObjectRecepcion.
              //Así aca podemos setear aca colocar el thread sleep de 5 seg         
+        System.out.println("hablaaaa");
         if (Configuracion.transporteRecepcion.isDisponible() && !Configuracion.transporteRecepcion.getListaPaquete().isEmpty())
         {
+            System.out.println("ok entro aqui");
         XStream xstream = new XStream();
         xstream.alias("Transporte", Transporte.class);
         xstream.alias("Paquete",Paquete.class);
