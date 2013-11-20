@@ -23,13 +23,16 @@ public class Main {
          RemClient.CrearClienteServerCentral();
          
          
-         boolean creo = false;
          
          
  //Mandar al server central la info de la sucursal.  Falta validar que se mande solo si creo.     
         RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal,true);
   
+    boolean creo = false;
+    while (!creo){
+    creo=RemClient.CrearClientes();
     
+    }
         
           Menu menu = new Menu();
          menu.setVisible(true);

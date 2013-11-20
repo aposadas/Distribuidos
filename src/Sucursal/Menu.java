@@ -137,9 +137,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBorrarEjecucionActionPerformed
     
     private void jConsultarPaquetesActionPerformed(java.awt.event.ActionEvent evt) {                                                
-//        ConsultarPaquetes consultarpaquetes= new ConsultarPaquetes();
-//        this.dispose();
-//        consultarpaquetes.setVisible(true);
+        ConsultarPaquetes consultarpaquetes= new ConsultarPaquetes();
+        this.dispose();
+        consultarpaquetes.setVisible(true);
     } 
     /**
      * @param args the command line arguments
