@@ -34,11 +34,16 @@ public class Logica {
           idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
       
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
+
        
       
       if (!paquete.getDestino().equals(Configuracion.numeroSucursalEnvio)){
       //ARREGLAR MOVER A LISTA
       Configuracion.transporteEnvio.getListaPaquete().add(paquete);
+
+    //lo que agrege yo///  
+    //  RemClient.enviarPaqueteAServerCenral(paquete, true);
+     /////////  
       XStream xstream = new XStream();
       xstream.alias("Transporte", Transporte.class);
       xstream.alias("Paquete",Paquete.class);

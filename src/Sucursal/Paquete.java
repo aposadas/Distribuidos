@@ -4,6 +4,7 @@
  */
 package Sucursal;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author Aileen
  */
-public class Paquete {
+public class Paquete  {
     private int id;
     private long tiempoDeSalida;
     private long tiempoDeLlegada;

@@ -21,16 +21,15 @@ public class Main {
          RemServer.CrearServidor();
  //CREO LA CONEXION PARA EL SERVER CENTRAL
          RemClient.CrearClienteServerCentral();
+         
+         
          boolean creo = false;
- //Mandar IP DEL CLIENTE CREADO       
+         
+         
+ //Mandar al server central la info de la sucursal.  Falta validar que se mande solo si creo.     
+        RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal,true);
   
-
-        //RemClient.enviarIp(Configuracion.IpServidorEnvio);
-        while (!creo){
-        creo= RemClient.CrearClientes();
-        }
-        RemClient.enviarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal);
-  
+    
         
           Menu menu = new Menu();
          menu.setVisible(true);

@@ -19,7 +19,7 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        this.jLabel1.setText("Bienvenido a la Sucursal #" + Configuracion.numeroSucursal + ", Seleccione un opcion:");
+        this.jLabel1.setText("Bienvenido a la Sucursal # " + Configuracion.numeroSucursal );
     }
 
     /**
@@ -32,13 +32,20 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
         jBEnviarPaquete = new javax.swing.JButton();
         jConsultarPaquetes = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButtonBorrarEjecucion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Bienvenido, Seleccione una acción!");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel1.setText("Bienvenido");
 
+        jBEnviarPaquete.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jBEnviarPaquete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/send.png"))); // NOI18N
         jBEnviarPaquete.setText("Enviar paquete");
         jBEnviarPaquete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -46,38 +53,71 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        jConsultarPaquetes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jConsultarPaquetes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
         jConsultarPaquetes.setText("Consultar paquetes");
-        jConsultarPaquetes.addActionListener(new java.awt.event.ActionListener(){
-        public void actionPerformed(java.awt.event.ActionEvent evt){
-            jConsultarPaquetesActionPerformed(evt);
-        }
+        jConsultarPaquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jConsultarPaquetesActionPerformed(evt);
+            }
         });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText(" Seleccione una acción:");
+
+        jButtonBorrarEjecucion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonBorrarEjecucion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/exit.png"))); // NOI18N
+        jButtonBorrarEjecucion.setText("Eliminar Sucursal");
+        jButtonBorrarEjecucion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarEjecucionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(108, 108, 108))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jConsultarPaquetes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBEnviarPaquete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(158, 158, 158))))
+                            .addComponent(jButtonBorrarEjecucion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBEnviarPaquete, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(41, 41, 41)
+                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(41, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel1)
-                .addGap(63, 63, 63)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBEnviarPaquete)
-                .addGap(54, 54, 54)
+                .addGap(26, 26, 26)
                 .addComponent(jConsultarPaquetes)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(jButtonBorrarEjecucion)
+                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(84, 84, 84)
+                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(240, Short.MAX_VALUE)))
         );
 
         pack();
@@ -88,11 +128,18 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
         enviarpaquete.setVisible(true);
     }//GEN-LAST:event_jBEnviarPaqueteActionPerformed
+
+    private void jButtonBorrarEjecucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarEjecucionActionPerformed
+        // TODO add your handling code here:
+        RemClient.eliminarSucursalActiva(Configuracion.IpServidorEnvio, Configuracion.numeroSucursal);
+        Runtime.getRuntime().exit(0);
+        
+    }//GEN-LAST:event_jButtonBorrarEjecucionActionPerformed
     
     private void jConsultarPaquetesActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        ConsultarPaquetes consultarpaquetes= new ConsultarPaquetes();
-        this.dispose();
-        consultarpaquetes.setVisible(true);
+//        ConsultarPaquetes consultarpaquetes= new ConsultarPaquetes();
+//        this.dispose();
+//        consultarpaquetes.setVisible(true);
     } 
     /**
      * @param args the command line arguments
@@ -130,7 +177,10 @@ public class Menu extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBEnviarPaquete;
+    private javax.swing.JButton jButtonBorrarEjecucion;
     private javax.swing.JButton jConsultarPaquetes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JSeparator jSeparator8;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,6 +18,8 @@ import java.util.ArrayList;
  */
 public class RemServer {
  static Registry registro;
+
+    
  public static void CrearServidor() throws AlreadyBoundException {
    
    GestorXml.obtenerConfiguracion();
@@ -27,9 +29,13 @@ public class RemServer {
             System.setProperty("java.rmi.server.hostname","localhost");
             registro = java.rmi.registry.LocateRegistry.createRegistry(Configuracion.puertoSucursal);
             registro.bind("objetoServidor" + Configuracion.numeroSucursal, mensajeRemoto);
+  
+            
+            
         } 
     catch(RemoteException re) 
         {
+
             System.out.println("RemoteException: " + re);
          } 
     

@@ -25,4 +25,6 @@ public class Configuracion {
    public static ArrayList<Paquete> listaPaquetesSucursalSiguiente = new ArrayList<>();
    public static Transporte transporteEnvio;
    public static Transporte transporteRecepcion;
+   
+   
 }
