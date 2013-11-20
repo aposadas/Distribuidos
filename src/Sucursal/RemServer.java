@@ -10,10 +10,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 
-/** The server creates a RemImpl (which implements
- *  the Rem interface), then registers it with
- *  the URL Rem, where clients can access it.
- *
+/** 
  * @author Aileen
  */
 public class RemServer {

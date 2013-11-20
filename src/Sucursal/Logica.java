@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,16 +23,25 @@ public class Logica {
    
     
     public static void CrearPaquete(String destino) {
-      long tiempoCreacion= System.currentTimeMillis()/1000;
-   
-        System.out.println(Configuracion.transporteEnvio.isDisponible());
+
+
+        long tiempoCreacion ;
+         
+        tiempoCreacion = RemClient.pedirReloj();
+        
+       // long tiempoCreacion= System.currentTimeMillis()/1000 ;
+    
+  
+      
+
       ArrayList <Paquete> paquetesRecibidos = new ArrayList <>();//GestorXml.obtenerPaquetesRecibidos();
       
       int idPaqueteACrear;
-      if (paquetesRecibidos.isEmpty())
-        idPaqueteACrear = Integer.parseInt(Configuracion.numeroSucursal + Configuracion.numeroSucursalRecepcion) + 1;
-      else
-          idPaqueteACrear = Integer.parseInt(paquetesRecibidos.get(paquetesRecibidos.size() -1).getOrigen());
+      Random rand = new Random(); 
+       rand.nextInt(40); 
+      
+        idPaqueteACrear = Integer.parseInt(Configuracion.numeroSucursal + Configuracion.numeroSucursalRecepcion) + rand.nextInt(40);
+      
       
       ArrayList <Incidencia> listaIncidencia = new ArrayList <>();
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
@@ -53,7 +63,8 @@ public class Logica {
                 Configuracion.transporteEnvio.setDisponible(false);
                 Configuracion.transporteEnvio.getListaPaquete().remove(paquete);
             try {
-             RemClient.remObjectEnvio.enviarPaquete(transporteXML);
+                System.out.println("TRANSPORTE LOGICA " +transporteXML);
+                RemClient.remObjectEnvio.enviarPaquete(transporteXML);
              
              
              } catch (RemoteException ex) {
@@ -70,9 +81,6 @@ public class Logica {
           else
                 Configuracion.listaPaquetesAEnviar.add(paquete);
     }
-    //static ArrayList <String> obtenerSucursales() {
-     
-   // }
- 
+
     
 }

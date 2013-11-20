@@ -49,6 +49,8 @@ public static Registry registro;
       
    GUIServidorCentral gui = new GUIServidorCentral();
    gui.setVisible(true);
+   
+   System.out.println("lista" +RemServidorCentralImpl.getListaSucursales() );
     }
     
     

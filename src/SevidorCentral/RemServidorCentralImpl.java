@@ -19,8 +19,17 @@ import java.util.Iterator;
 public class RemServidorCentralImpl extends UnicastRemoteObject implements RemServidorCentral{
 
     public static ArrayList<String> listaSucursales = new ArrayList<>();
-    public static ArrayList<Paquete> listaPaquetes = new ArrayList<>();
+    public static ArrayList<Paquete> listaPaquetes = new ArrayList<>(); 
+    public static long relojLogico=0;
 
+    public static long getRelojLogico() {
+        return relojLogico;
+    }
+
+    public static void setRelojLogico(long relojLogico) {
+        RemServidorCentralImpl.relojLogico = relojLogico;
+    }
+   
     public static ArrayList<String> getListaSucursales() {
         return listaSucursales;
     }
@@ -41,7 +50,7 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
         
         listaSucursales.add("Sucursal "+ numSucursal);
         System.out.println("Se Agrego el  ip de las sucursal" + ipSucursal +" num sucursal "+ numSucursal);
-       
+       System.out.println("lista" + getListaSucursales() ); 
        
         
     }
@@ -57,8 +66,11 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
 
     @Override
     public ArrayList<String> listaSucursalActiva() throws RemoteException {
+        
+        System.out.println("lista" + listaSucursales ); 
         return listaSucursales;
         
+           
       
     }
 
@@ -94,6 +106,34 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
     public void eliminarSucursal(String numSucursal) {
         
       listaSucursales.remove("Sucursal "+numSucursal);
+    }
+
+    @Override
+    public void sistemaColapso(String listaTransporte) throws RemoteException {
+        
+        
+        
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void actualizarReloj(String reloj) throws RemoteException {
+       
+         long cambios=0;
+         cambios =  relojLogico+ Long.parseLong(reloj);
+       
+        // String cambioHoraString= String.valueOf(cambios);
+         
+        //return cambioHoraString; 
+         relojLogico=cambios;
+    }
+
+    @Override
+    public String mandarReloj() throws RemoteException {
+        
+        String tiempoString= String.valueOf(relojLogico);
+        
+        return tiempoString;
     }
     
   

@@ -22,17 +22,24 @@ public class HiloRecibirMensajes extends Thread {
         ArrayList <Paquete> listaPaqueteAux = new ArrayList<>();
         try {
             String transporte= RemClient.remObjectRecepcion.pedirPaquetes(Configuracion.numeroSucursal);
+            
            
+            
             if (transporte!=null)
             {
+                long tiempo =RemClient.pedirReloj();
                 XStream xstream = new XStream();
                 xstream.alias("Transporte", Transporte.class);
                 xstream.alias("Paquete", Paquete.class);
                 Transporte transporte_paquete = (Transporte) xstream.fromXML(transporte);
                 
+                
+                
                 for (int i = 0; i < transporte_paquete.getListaPaquete().size(); i++) {
                     Paquete paquete = transporte_paquete.getListaPaquete().get(i);
-                    paquete.setTiempoDeLlegada(System.currentTimeMillis()/1000);
+                    tiempo = tiempo+6; //1 de para decidir y 5 para la recepción
+                    
+                    paquete.setTiempoDeLlegada(tiempo);
                     Configuracion.listaPaquetesRecibidos.add(paquete);
                     listaPaqueteAux.add(transporte_paquete.getListaPaquete().get(i));
                     
@@ -45,6 +52,8 @@ public class HiloRecibirMensajes extends Thread {
                 transporte_paquete.getListaPaquete().removeAll(listaPaqueteAux);
                 transporte = xstream.toXML(transporte_paquete);
                 RemClient.remObjectRecepcion.reenviarTransporteAjeno(transporte);
+                
+                RemClient.actualizarHoraServerCentral(tiempo);
             }
         }  
            catch (RemoteException ex) {

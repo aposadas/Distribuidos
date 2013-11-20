@@ -5,6 +5,8 @@
 package Sucursal;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 /**
  *
@@ -16,8 +18,44 @@ public class EnviarPaquete extends javax.swing.JFrame {
      * Creates new form EnviarPaquete
      */
     public EnviarPaquete() {
+      
         initComponents();
-        //jCBlistaSucursales = Logica.obtenerSucursales();
+        llenarCombo();
+             
+       
+
+    
+    }
+    
+    
+   public void llenarCombo (){
+   
+    ArrayList <String> lista = new ArrayList ();
+             String numero;
+             
+                for (String string : RemClient.obtenerSucursales()) {
+                    
+                    numero = string.substring(string.indexOf(" ")+1); //obtiene el numero de la sucursal
+                    
+                    if (!numero.contains(Configuracion.numeroSucursal))
+                    
+                        lista.add(numero);
+                    
+                }
+             for (String string : lista) {
+                 if (validarItemCombo(string) == true)
+                    jCBlistaSucursales.addItem(string);
+        }
+
+   }
+   
+    public boolean validarItemCombo(String valor){
+        for (int i = 0; i < jCBlistaSucursales.getItemCount(); i++) {
+            if (jCBlistaSucursales.getItemAt(i).toString().contains(valor))
+                return false;
+            
+        }
+        return true;
     }
 
     /**
@@ -54,7 +92,12 @@ public class EnviarPaquete extends javax.swing.JFrame {
         });
 
         jCBlistaSucursales.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jCBlistaSucursales.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
+        jCBlistaSucursales.setMaximumRowCount(10);
+        jCBlistaSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBlistaSucursalesActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Sucursal que desea enviar:");
@@ -121,6 +164,8 @@ public class EnviarPaquete extends javax.swing.JFrame {
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_jBAceptarActionPerformed
         Logica.CrearPaquete((String) jCBlistaSucursales.getSelectedItem());
         this.jLabel3.setText("Mensaje enviado a la sucursal "+jCBlistaSucursales.getSelectedItem() );
+        
+        
     }//GEN-LAST:event_jBAceptarActionPerformed
 
     private void jBVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBVolverActionPerformed
@@ -129,6 +174,10 @@ public class EnviarPaquete extends javax.swing.JFrame {
         menu.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_jBVolverActionPerformed
+
+    private void jCBlistaSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBlistaSucursalesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBlistaSucursalesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +217,13 @@ public class EnviarPaquete extends javax.swing.JFrame {
 
             public void run() {
                 new EnviarPaquete().setVisible(true);
+            
+        
+            
             }
+            
+            
+            
         });
        
         

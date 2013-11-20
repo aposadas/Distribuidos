@@ -44,7 +44,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
    
     public String pedirPaquetes(String Transporte) throws RemoteException {
        // RemClient.remObjectRecepcion.
-             //Así aca podemos setear aca colocar el thread sleep de 5 seg         
+             //AsÃ­ aca podemos setear aca colocar el thread sleep de 5 seg         
         
         if (Configuracion.transporteRecepcion.isDisponible() && !Configuracion.transporteRecepcion.getListaPaquete().isEmpty())
         {
@@ -96,7 +96,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         else 
         {
              
-               Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasó por la sucursal: " + Configuracion.numeroSucursal);
+               Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,System.currentTimeMillis()/1000,"Traslado","El paquete pasÃ³ por la sucursal: " + Configuracion.numeroSucursal);
                 transportePaquetes.getListaPaquete().get(j).getListaIncidencia().add(incidencia);
                 //agregar espera de tiempo
                  
@@ -113,7 +113,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        
          RemClient.remObjectEnvio.enviarPaquete(transporte);
        }
-        //chequeo si estoy en la misma sucursal de donde salí.
+        //chequeo si estoy en la misma sucursal de donde salÃ­.
            
        if (transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal))
        { 
