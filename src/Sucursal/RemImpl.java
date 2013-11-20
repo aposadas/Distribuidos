@@ -96,7 +96,17 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         
         //chequeo si estoy en la misma sucursal de donde salí.
        if (transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal))
-           Configuracion.transporteEnvio.setDisponible(true);
+       { Configuracion.transporteEnvio.setDisponible(true);
+        
+           for (int i = 0; i < Configuracion.listaPaquetesAEnviar.size(); i++) {
+               
+           
+        transportePaquetes.getListaPaquete().add(Configuracion.listaPaquetesAEnviar.get(i));
+        Configuracion.listaPaquetesAEnviar.remove(i);
+        transporte = xstream.toXML(transportePaquetes);
+        RemClient.remObjectEnvio.enviarPaquete(transporte);
+           }
+       }
        
        else {
        RemClient.remObjectEnvio.enviarPaquete(transporte);
@@ -115,6 +125,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     if (transporte.getSucursal().equals(Configuracion.numeroSucursal))
      {
      Configuracion.transporteRecepcion = transporte;
+     
      }
     else {
         //aumentar tiempo
