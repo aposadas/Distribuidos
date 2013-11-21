@@ -46,7 +46,10 @@ public class Logica {
       ArrayList <Incidencia> listaIncidencia = new ArrayList <>();
       Paquete paquete = new Paquete(idPaqueteACrear,tiempoCreacion,Configuracion.numeroSucursal, destino);
 
-
+      tiempoCreacion=tiempoCreacion+1; //mas el tiempo de carga
+    
+      RemClient.actualizarHoraServerCentral(tiempoCreacion);
+        
      
       if (!paquete.getDestino().equals(Configuracion.numeroSucursalEnvio)){
         

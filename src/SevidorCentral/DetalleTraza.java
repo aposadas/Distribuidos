@@ -224,6 +224,7 @@ public class DetalleTraza extends javax.swing.JFrame {
     private void iniciar(){
         
         long tiempoTotal=0;
+        long tiempoTotalFinal=0;
         jLabelIpOrigen.setText(paquete.getOrigen());
         jLabelIpDestino.setText(paquete.getDestino());
      
@@ -241,7 +242,7 @@ public class DetalleTraza extends javax.swing.JFrame {
             model.addElement("Sucursal " +paquete.getOrigen()+ " Tiempo: " + paquete.getTiempoDeSalida()+ " seg. "+ " -->");
             model.addElement("Sucursal " + paquete.getDestino()+ " Tiempo: " + paquete.getTiempoDeLlegada()+" seg. " );
 
-                tiempoTotal=paquete.getTiempoDeLlegada()+paquete.getTiempoDeSalida();
+                tiempoTotalFinal=paquete.getTiempoDeLlegada()-paquete.getTiempoDeSalida();
 
             jList1.setModel(model);  
        
@@ -253,16 +254,19 @@ public class DetalleTraza extends javax.swing.JFrame {
                 Incidencia incidencia = (Incidencia) iterator.next();
                 String sucursal = incidencia.getSucursal();
                 String tiempo = String.valueOf(incidencia.getMomento());
+                
                 model.addElement("  Sucursal " + sucursal + " tiempo: " + tiempo + " seg. " + " -->");
-                tiempoTotal=incidencia.getMomento()+tiempoTotal;
+                
             }
             model.addElement("  Sucursal " + paquete.getDestino()+ " tiempo: " + paquete.getTiempoDeLlegada() +" seg. ");
+            
+            tiempoTotalFinal=tiempoTotal+paquete.getTiempoDeLlegada()-paquete.getTiempoDeSalida();
             jList1.setModel(model);  
      
-                tiempoTotal=tiempoTotal+paquete.getTiempoDeLlegada()+1;
+               
        }
        
-       jLabeltiempoTotal.setText(String.valueOf(tiempoTotal-paquete.getTiempoDeSalida())+" Segundos.");
+       jLabeltiempoTotal.setText(String.valueOf(tiempoTotalFinal)+" Segundos.");
        
     }
     

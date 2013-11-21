@@ -4,6 +4,7 @@
  */
 package SevidorCentral;
 
+import Sucursal.Incidencia;
 import Sucursal.Paquete;
 import java.util.Iterator;
 import javax.swing.DefaultListModel;
@@ -148,7 +149,40 @@ public class DetalleEstadisticaTiempo extends javax.swing.JFrame {
         
         jLabelHoraLLegada.setText(String.valueOf(paquete.getTiempoDeLlegada()));
         jLabelHoraSalida.setText(String.valueOf(paquete.getTiempoDeSalida()));
-        jLabelTiempoDestino.setText(String.valueOf(paquete.getTiempoDeLlegada()-paquete.getTiempoDeSalida()));
+        
+        
+               long tiempoTotal=0;
+        long tiempoTotalFinal=0;
+  
+        DefaultListModel model = new DefaultListModel();
+        
+        
+       if (paquete.getListaIncidencia().isEmpty() == true){
+       
+                tiempoTotalFinal=paquete.getTiempoDeLlegada()-paquete.getTiempoDeSalida();
+
+         jLabelTiempoDestino.setText(String.valueOf(tiempoTotalFinal));
+       
+       }
+       else{
+            Iterator iterator = paquete.getListaIncidencia().iterator();
+          
+            while (iterator.hasNext()){
+                Incidencia incidencia = (Incidencia) iterator.next();
+                String sucursal = incidencia.getSucursal();
+                String tiempo = String.valueOf(incidencia.getMomento());
+                
+            }
+           
+            
+            tiempoTotalFinal=tiempoTotal+paquete.getTiempoDeLlegada()-paquete.getTiempoDeSalida();
+            
+     
+               
+       }
+       
+        jLabelTiempoDestino.setText(String.valueOf(tiempoTotalFinal)+" Segundos.");
+        
         
     }
     

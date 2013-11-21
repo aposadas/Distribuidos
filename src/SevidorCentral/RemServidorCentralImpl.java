@@ -118,14 +118,15 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
 
     @Override
     public void actualizarReloj(String reloj) throws RemoteException {
-       
+        System.out.println("reloj antes:" + relojLogico);
          long cambios=0;
-         cambios =  relojLogico+ Long.parseLong(reloj);
+         relojLogico = Long.parseLong(reloj);
        
         // String cambioHoraString= String.valueOf(cambios);
          
         //return cambioHoraString; 
-         relojLogico=cambios;
+        // relojLogico=cambios;
+         System.out.println("relojdespues:" + relojLogico);
     }
 
     @Override

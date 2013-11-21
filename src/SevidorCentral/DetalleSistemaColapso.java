@@ -210,6 +210,8 @@ public class DetalleSistemaColapso extends javax.swing.JFrame {
     
     
     private void iniciar(){
+        
+        
          jLabelIpOrigen.setText(paquete.getOrigen());
         jLabelIpDestino.setText(paquete.getDestino());
         

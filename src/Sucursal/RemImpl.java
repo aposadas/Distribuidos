@@ -75,15 +75,20 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
        
        long tiempo;
        tiempo =RemClient.pedirReloj();
+       System.out.println("tiempo envio paquete " +tiempo);
        //chequeo si el paquete es para esta o sucursal y lo agrego sino le agrego una incidencia y lo reenvio
-       
+       //tiempo= tiempo+11; 
        if (!transportePaquetes.getSucursal().equals(Configuracion.numeroSucursal)){
        if (tamanio>0){
+          
            
         for (int j=0;j<tamanio;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
              listaPaquetesAux.add(transportePaquetes.getListaPaquete().get(j));
-             tiempo= tiempo+11;
+            
+             
+             tiempo = tiempo + 11;
+             System.out.println("tiempo envio paquete actualizado " +tiempo);
              transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(tiempo);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
              Paquete paquete = transportePaquetes.getListaPaquete().get(j);
@@ -91,20 +96,22 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
              String paqueteXML = xstream.toXML(paquete);
              RemClient.enviarPaqueteAServerCenral(paqueteXML,true);
              System.out.println("se mando el paquete");
+            
              
          }
          
         
         else 
         {
-             tiempo++;
+             tiempo =tiempo+1;
                Incidencia incidencia = new Incidencia (Configuracion.numeroSucursal,tiempo,"Traslado","El paquete pasÃ³ por la sucursal: " + Configuracion.numeroSucursal);
                 transportePaquetes.getListaPaquete().get(j).getListaIncidencia().add(incidencia);
                 //agregar espera de tiempo
+                 System.out.println("tiempo envio paquete incidencia " +tiempo);
                  
               }
         }
-       
+      
       
        }
         transportePaquetes.getListaPaquete().removeAll(listaPaquetesAux);
@@ -134,7 +141,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         Configuracion.listaPaquetesAEnviar.removeAll(listaPaquetesAux);
         
         transporte = xstream.toXML(transportePaquetes);   
-           System.out.println("EPAAAA" + transporte);
+          
         if (!transportePaquetes.getListaPaquete().isEmpty()){
             transporte = xstream.toXML(transportePaquetes);
             
@@ -144,8 +151,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
         
        }
        
-   RemClient.actualizarHoraServerCentral(tiempo);
-       
+     RemClient.actualizarHoraServerCentral(tiempo);
+    System.out.println("tiempo envio paquete final " +tiempo);   
     }
     
     public void reenviarTransporteAjeno(String transporteRecepcion)throws RemoteException{
