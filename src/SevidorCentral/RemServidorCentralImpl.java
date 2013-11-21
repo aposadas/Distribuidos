@@ -21,6 +21,7 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
     public static ArrayList<String> listaSucursales = new ArrayList<>();
     public static ArrayList<Paquete> listaPaquetes = new ArrayList<>();
 
+   
     public static ArrayList<String> getListaSucursales() {
         return listaSucursales;
     }
@@ -41,7 +42,7 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
         
         listaSucursales.add("Sucursal "+ numSucursal);
         System.out.println("Se Agrego el  ip de las sucursal" + ipSucursal +" num sucursal "+ numSucursal);
-       
+       System.out.println("lista" + getListaSucursales() ); 
        
         
     }
@@ -57,8 +58,11 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
 
     @Override
     public ArrayList<String> listaSucursalActiva() throws RemoteException {
+        
+        System.out.println("lista" + listaSucursales ); 
         return listaSucursales;
         
+           
       
     }
 
@@ -94,6 +98,14 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
     public void eliminarSucursal(String numSucursal) {
         
       listaSucursales.remove("Sucursal "+numSucursal);
+    }
+
+    @Override
+    public void sistemaColapso(String listaTransporte) throws RemoteException {
+        
+        
+        
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
   

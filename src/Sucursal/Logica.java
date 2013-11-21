@@ -64,10 +64,8 @@ public class Logica {
       else 
           Configuracion.transporteRecepcion.getListaPaquete().add(paquete);
     }
-    //static ArrayList <String> obtenerSucursales() {
-     
-   // }
-    
+   
+
     public static void agregarPaquete(Paquete paquete, Transporte transporte){
     transporte.getListaPaquete().add(paquete);
 

@@ -4,12 +4,8 @@ The Interface for the Remote Object
 package Sucursal;
 import java.rmi.*;
 import Sucursal.Transporte;
+import java.util.ArrayList;
 /**
- * The RMI client will use this interface directly.
- *  The RMI server will make a real remote object that
- *  implements this, then register an instance of it
- *  with some URL.
- * 
  * @author Aileen
  */
 public interface Rem extends java.rmi.Remote {
@@ -18,5 +14,6 @@ public interface Rem extends java.rmi.Remote {
     public void enviarPaquete(String paquete)throws RemoteException;
     public void reenviarTransporteAjeno (String tasnporteRecepcion) throws RemoteException;
     
-    
+     
+     
 }

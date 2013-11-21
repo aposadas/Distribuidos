@@ -15,13 +15,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/** This is the actual implementation of Rem that
- *  the RMI server uses. The server builds an instance
- *  of this then registers it with a URL. The
- *  client accesses the URL and binds the result to
- *  a Rem (not a RemImpl; it doesn't have this).
- */
-/**
+/*
+ *
  *
  * @author Aileen
  */
@@ -140,4 +135,8 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
     
     }
     }
+    
+       
+
+    
 }
