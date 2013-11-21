@@ -50,10 +50,10 @@ public class DetalleEstadisticaTiempo extends javax.swing.JFrame {
         jLabel1.setText("Detalle de la Estadística del Paquete");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Hora de Envio:");
+        jLabel6.setText("Tiempo de Envio:");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Hora de Llegada: ");
+        jLabel7.setText("Tiempo de Llegada: ");
 
         jLabelHoraSalida.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabelHoraSalida.setText("-");
@@ -93,9 +93,9 @@ public class DetalleEstadisticaTiempo extends javax.swing.JFrame {
                                 .addGap(70, 70, 70)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)
-                                    .addComponent(jButtonRegresar))
+                                    .addComponent(jButtonRegresar)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)

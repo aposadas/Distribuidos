@@ -203,6 +203,7 @@ public class RemClient {
               
               relojServerLong = Long.parseLong(relojServerString);
               
+              
        return relojServerLong;
         } catch (NotBoundException ex) {
             Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);

@@ -35,7 +35,7 @@ public class HiloRecibirMensajes extends Thread {
                 
                 for (int i = 0; i < transporte_paquete.getListaPaquete().size(); i++) {
                     Paquete paquete = transporte_paquete.getListaPaquete().get(i);
-                    tiempo = tiempo+5;
+                    tiempo = tiempo+6; //1 de para decidir y 5 para la recepción
                     
                     paquete.setTiempoDeLlegada(tiempo);
                     Configuracion.listaPaquetesRecibidos.add(paquete);

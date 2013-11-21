@@ -78,7 +78,7 @@ public class RemImpl extends UnicastRemoteObject implements Rem {
            
         for (int j=0;j<tamanio;j++){
          if (transportePaquetes.getListaPaquete().get(j).getDestino().equals(Configuracion.numeroSucursal)){
-            tiempo= tiempo+10;
+            tiempo= tiempo+11;// 10 de envio y 1 de para decidir
              transportePaquetes.getListaPaquete().get(j).setTiempoDeLlegada(tiempo);
              Configuracion.listaPaquetesRecibidos.add(transportePaquetes.getListaPaquete().get(j));
     Paquete paquete = transportePaquetes.getListaPaquete().get(j);
