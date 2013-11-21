@@ -144,9 +144,11 @@ public class DetalleEstadisticaTiempo extends javax.swing.JFrame {
     
     private void iniciar(){
         
+        
+        
         jLabelHoraLLegada.setText(String.valueOf(paquete.getTiempoDeLlegada()));
         jLabelHoraSalida.setText(String.valueOf(paquete.getTiempoDeSalida()));
-        jLabelTiempoDestino.setText(String.valueOf(paquete.getTiempoDeSalida()-paquete.getTiempoDeLlegada()));
+        jLabelTiempoDestino.setText(String.valueOf(paquete.getTiempoDeLlegada()-paquete.getTiempoDeSalida()));
         
     }
     

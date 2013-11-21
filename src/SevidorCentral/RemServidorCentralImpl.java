@@ -19,8 +19,16 @@ import java.util.Iterator;
 public class RemServidorCentralImpl extends UnicastRemoteObject implements RemServidorCentral{
 
     public static ArrayList<String> listaSucursales = new ArrayList<>();
-    public static ArrayList<Paquete> listaPaquetes = new ArrayList<>();
+    public static ArrayList<Paquete> listaPaquetes = new ArrayList<>(); 
+    public static long relojLogico=0;
 
+    public static long getRelojLogico() {
+        return relojLogico;
+    }
+
+    public static void setRelojLogico(long relojLogico) {
+        RemServidorCentralImpl.relojLogico = relojLogico;
+    }
    
     public static ArrayList<String> getListaSucursales() {
         return listaSucursales;
@@ -106,6 +114,26 @@ public class RemServidorCentralImpl extends UnicastRemoteObject implements RemSe
         
         
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void actualizarReloj(String reloj) throws RemoteException {
+       
+         long cambios=0;
+         cambios =  relojLogico+ Long.parseLong(reloj);
+       
+        // String cambioHoraString= String.valueOf(cambios);
+         
+        //return cambioHoraString; 
+         relojLogico=cambios;
+    }
+
+    @Override
+    public String mandarReloj() throws RemoteException {
+        
+        String tiempoString= String.valueOf(relojLogico);
+        
+        return tiempoString;
     }
     
   

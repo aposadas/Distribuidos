@@ -190,4 +190,56 @@ public class RemClient {
         return lista;
      }
      
+     
+      public static  long pedirReloj(){
+       String relojServerString;
+       long relojServerLong =0;
+           try {
+           
+            
+            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+          
+              relojServerString= remServidorCentral.mandarReloj();
+              
+              relojServerLong = Long.parseLong(relojServerString);
+              
+       return relojServerLong;
+        } catch (NotBoundException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return relojServerLong;
+          }
+      
+      
+            public static void actualizarHoraServerCentral(long tiempo){
+       String relojAct;
+       
+           try {
+           
+            
+            RemServidorCentral remServidorCentral = (RemServidorCentral) Naming.lookup("//localhost/"+"objetoServidorCentral");
+          
+            relojAct =  String.valueOf(tiempo);  
+            
+            remServidorCentral.actualizarReloj(relojAct);
+              
+              
+             
+      
+        } catch (NotBoundException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(RemClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         
+          }
+      
+      
 }

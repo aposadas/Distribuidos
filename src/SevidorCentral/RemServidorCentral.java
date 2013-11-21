@@ -21,7 +21,8 @@ public interface RemServidorCentral extends java.rmi.Remote {
     public boolean verificarSucursal(String sucursal) throws RemoteException; 
     public void eliminarSucursal(String sucursal)throws RemoteException;
     public void sistemaColapso(String listaTransporte) throws RemoteException;
-    
+    public String mandarReloj()throws RemoteException;
+    public void actualizarReloj(String reloj)throws RemoteException;
     
     
     
